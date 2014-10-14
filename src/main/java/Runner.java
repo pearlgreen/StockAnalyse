@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class Runner  {
 
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, URISyntaxException, XPathExpressionException {
-        XmlGrab test = new XmlGrab();
+        BuildData test = new BuildData();
 
 
     }
