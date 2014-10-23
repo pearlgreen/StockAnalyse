@@ -14,6 +14,9 @@ public class Runner  {
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, URISyntaxException, XPathExpressionException {
         BuildData test = new BuildData();
 
+        test.initialise();
+        test.filterAndSortData(3);
+
 
     }
 }
