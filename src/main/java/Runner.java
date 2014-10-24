@@ -15,7 +15,7 @@ public class Runner  {
         BuildData test = new BuildData();
 
         test.initialise();
-        test.filterAndSortData(3);
+        test.sortData(3);
 
 
     }
