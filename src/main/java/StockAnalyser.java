@@ -19,13 +19,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
-public class BuildData{
+public class StockAnalyser{
 
     private List<List> stockData;
     List headers;
 
 
-    public BuildData() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
+    public StockAnalyser() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
 
     }
 
@@ -85,6 +85,7 @@ public class BuildData{
 
 
     public List filterOn(int column, float value){
+
 
         List toReturn = new ArrayList();
 
