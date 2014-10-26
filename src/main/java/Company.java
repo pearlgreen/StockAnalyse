@@ -10,6 +10,7 @@ public class Company  {
     private String companySymbol;
     private String companyName;
     private String sector;
+
     private CompanyData currentData;
     private List<CompanyData> historicalData;
 
@@ -17,38 +18,38 @@ public class Company  {
 
     }
 
-
-    public String getCompanySymbol1() {
+    public String getCompanySymbol() {
         return companySymbol;
     }
 
-    public void setCompanySymbol1(String companySymbol1) {
-        this.companySymbol = companySymbol1;
+    public void setCompanySymbol(String companySymbol) {
+        this.companySymbol = companySymbol;
     }
 
-    public String getCompanyName2() {
+    public String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName2(String companyName2) {
-        this.companyName = companyName2;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getSector3() {
+    public String getSector() {
         return sector;
     }
 
-    public void setSector3(String sector3) {
-        this.sector = sector3;
+    public void setSector(String sector) {
+        this.sector = sector;
     }
 
     public CompanyData getCurrentData() {
         return currentData;
     }
 
-    public void setStockData(CompanyData stockData) {
-        this.currentData = stockData;
+    public void setCurrentData(CompanyData currentData) {
+        this.currentData = currentData;
     }
+
 
     public List<CompanyData> getHistoricalData() { return historicalData; }
 

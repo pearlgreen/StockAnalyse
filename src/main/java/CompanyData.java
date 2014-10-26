@@ -5,6 +5,8 @@ import java.util.Date;
  */
 public class CompanyData {
 
+    private Date  dateOfData;
+    private float MarketCap;
     private float PEratio;
     private float SharesIssue;
     private float DivYield;
@@ -24,15 +26,20 @@ public class CompanyData {
     private float ChangeFromLow;
     private float PreTaxProfit;
 
+    private CalculatedData calculated;
 
 
+    public void CompanyData(){
 
-    public Date getDate() {
-           return date;
+        dateOfData = new Date ();
+        calculated = new CalculatedData();
+
+
     }
 
-    private Date  date;
-    private float MarketCap;
+    public Date getDate() {
+        return dateOfData;
+    }
 
     public float getPEratio() {
         return PEratio;
