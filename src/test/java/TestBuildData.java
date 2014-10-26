@@ -19,7 +19,7 @@ public class TestBuildData {
     @Test
     public void Test_listIsCorrectlySorted() throws URISyntaxException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
 
-        BuildData testData = new BuildData();
+        StockAnalyser testData = new StockAnalyser();
 
         ArrayList l = new ArrayList();
 

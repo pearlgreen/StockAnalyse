@@ -1,21 +1,14 @@
 
 
 import au.com.bytecode.opencsv.CSVReader;
-import org.jsoup.parser.Parser;
-import org.jsoup.parser.XmlTreeBuilder;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.*;
-import java.io.*;
-import java.lang.reflect.Array;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -101,7 +94,7 @@ public class StockAnalyser{
 
 
 
-    String getPageTest(String fileName, String companyName) throws SAXException, IOException, XPathExpressionException, ParserConfigurationException {
+  /*  String getPageTest(String fileName, String companyName) throws SAXException, IOException, XPathExpressionException, ParserConfigurationException {
 
        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -125,7 +118,7 @@ public class StockAnalyser{
 
         return test;
 
-    }
+    }*/
 
 }
 
