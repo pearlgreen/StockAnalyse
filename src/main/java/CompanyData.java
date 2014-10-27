@@ -6,8 +6,8 @@ import java.util.List;
  */
 public class CompanyData {
 
-    private Date  dateOfData;
-    private float MarketCap;
+    private int dateOfData;
+    private double MarketCap;
     private float PEratio;
     private float SharesIssue;
     private float DivYield;
@@ -30,16 +30,17 @@ public class CompanyData {
     private CalculatedData calculated;
 
 
-    public CompanyData(RawData subSetOfCSVData){
+    public CompanyData(RawData subSetOfCSVData, int _dateOfData){
 
-        dateOfData = new Date ();
+        dateOfData = _dateOfData;
         calculated = new CalculatedData();
-        this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
+        this.setMarketCap(subSetOfCSVData._marketCap);
+        //this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
 
 
     }
 
-    public Date getDate() {
+    public int getDate() {
         return dateOfData;
     }
 
@@ -187,11 +188,12 @@ public class CompanyData {
         PreTaxProfit = preTaxProfit;
     }
 
-    public float getMarketCap() {
-        return MarketCap;
+    public double getMarketCap() {
+        return
+                MarketCap;
     }
 
-    public void setMarketCap(float marketCap) {
+    public void setMarketCap(double marketCap) {
         MarketCap = marketCap;
     }
 }

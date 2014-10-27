@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class Company  {
 
+    private int dateOfCreation;
     private String companySymbol;
     private String companyName;
     private String sector;
@@ -15,13 +16,16 @@ public class Company  {
     private List<CompanyData> historicalData;
 
 
-    public Company(String _symbol, String _name, String _sector) {
+    public Company(RawData _dataIn, int dateOfCreation) {
 
-        this.setCompanySymbol(_symbol);
-        this.setCompanyName(_name);
-        this.setSector(_sector);
-        currentData=null;
-        historicalData=null;
+        this.dateOfCreation = dateOfCreation;
+        this.setCompanySymbol(_dataIn._symbol);
+        this.setCompanyName(_dataIn._companyName);
+        this.setSector(_dataIn._sector);
+
+        currentData = new CompanyData(_dataIn, dateOfCreation);
+        historicalData = new ArrayList<CompanyData>();
+        historicalData.add(currentData);
 
     }
 
@@ -60,7 +64,7 @@ public class Company  {
 
     public List<CompanyData> getHistoricalData() { return historicalData; }
 
-    public void addToHistorical(CompanyData _newData){
+    public void addData(CompanyData _newData){
 
         if (!historicalData.contains(_newData)) historicalData.add(historicalData.size(),_newData);
 
@@ -75,14 +79,12 @@ public class Company  {
     }
 
 
-    public CompanyData fetchDataForDate(Date _searchDate){
+    public CompanyData fetchDataForDate(int _searchDate){
 
         for (CompanyData c : historicalData) {
-            if (c.getDate().equals(_searchDate)) {
+            if (c.getDate()==(_searchDate)) {
                 return c;
             }
-
-
         }
 
         return null;

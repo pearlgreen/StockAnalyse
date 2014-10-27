@@ -16,7 +16,7 @@ public class Runner  {
         StockAnalyser test = new StockAnalyser();
 
         test.initialise();
-        test.generateForDate(new Date(System.currentTimeMillis()));
+       // test.generateForDate(new Date(System.currentTimeMillis()));
 
 
     }

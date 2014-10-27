@@ -5,31 +5,11 @@ import java.util.ArrayList;
  */
 public class RawData extends ArrayList {
 
+    public String _symbol;
+    public String _companyName;
+    public String _sector;
+    public double _marketCap;
 
 
-    public String parseSymbol() {
-
-        return "TODO";
-
-    }
-
-
-
-public String parseName() {
-
-    return "TODO";
-
-    }
-
-    public String parseSector() {
-
-        return "TODO";
-    }
-
-    public double parseMarketCap() {
-
-        return 0.00;
-
-    }
 
 }

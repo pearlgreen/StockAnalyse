@@ -15,11 +15,13 @@ import java.util.*;
 public class StockAnalyser{
 
     private List<RawData> stockData;
-    private Companies companies;
+    private Market companies;
     List headers;
 
 
     public StockAnalyser() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
+
+    companies = new Market();
 
     }
 
@@ -59,27 +61,6 @@ public class StockAnalyser{
     // every list of data
     // if company symbol is new, then create Company
     // if data date for Company is new, add new CompanyData
-
-    public void generateForDate(Date DateAtTimeOfExtraction){
-
-        for (RawData c : stockData){
-            Company existingCompany;
-            existingCompany = companies.FindBySymbol((String) c.parseSymbol());
-
-            if (existingCompany.equals(null)) {
-                existingCompany = companies.CreateNewCompany(c);
-                            }
-
-            if (existingCompany.fetchDataForDate(DateAtTimeOfExtraction).equals(null)){
-                existingCompany.addToHistorical(new CompanyData(c));
-
-
-            }
-
-
-        }
-    }
-
 
 
 
