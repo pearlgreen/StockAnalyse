@@ -30,10 +30,11 @@ public class CompanyData {
     private CalculatedData calculated;
 
 
-    public CompanyData(List rawCSVData){
+    public CompanyData(List subSetOfCSVData){
 
         dateOfData = new Date ();
         calculated = new CalculatedData();
+        this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
 
 
     }

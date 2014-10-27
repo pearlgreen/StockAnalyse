@@ -14,7 +14,12 @@ public class Company  {
     private CompanyData currentData;
     private List<CompanyData> historicalData;
 
-    public Company (List){
+    public Company (List rawCSVData){
+
+        this.setCompanySymbol((String)rawCSVData.get(1));
+        this.setCompanyName((String)rawCSVData.get(2));
+        this.setCurrentData(new CompanyData(rawCSVData));
+        addToHistorical(currentData);
 
     }
 

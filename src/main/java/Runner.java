@@ -4,6 +4,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 /**
  * Created by J on 11-Oct-2014.
@@ -15,7 +16,7 @@ public class Runner  {
         StockAnalyser test = new StockAnalyser();
 
         test.initialise();
-        test.sortData(3);
+        test.generateForDate(new Date(System.currentTimeMillis()));
 
 
     }

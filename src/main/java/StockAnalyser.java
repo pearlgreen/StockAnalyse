@@ -43,7 +43,6 @@ public class StockAnalyser{
         CSVReader parser = new CSVReader(new FileReader(file));
 
         stockData = new ArrayList();
-
         List<String[]> tmp = (ArrayList) parser.readAll();
 
         for(String[] c : tmp){
@@ -57,6 +56,9 @@ public class StockAnalyser{
     }
 
 
+    // every list of data
+    // if company symbol is new, then create Company
+    // if data date for Company is new, add new CompanyData
 
     public void generateForDate(Date DateAtTimeOfExtraction){
 
@@ -77,48 +79,7 @@ public class StockAnalyser{
 
         }
     }
-    // every list of data
-    // if company symbol is new, then create Company
-    // if data date for Company is new, add new CompanyData
 
-
-
-    public void sortData(final int sortOnColumn) {
-
-        Collections.sort(stockData,new Comparator<List>() {
-            @Override
-            public int compare(List o1, List o2) {
-                if (o1.get(sortOnColumn).equals("") ) {
-                    return -1;
-                }
-
-                else if (o2.get(sortOnColumn).equals("")) {
-                    return 1;
-                }
-               else {
-                        return Float.valueOf((String) o1.get(sortOnColumn)).compareTo(Float.valueOf((String) o2.get(sortOnColumn)));
-                    }
-
-              }
-        } );
-
-    }
-
-
-    public List filterOn(int column, float value){
-
-
-        List toReturn = new ArrayList();
-
-        for(List l : stockData){
-
-            if (Float.class.cast(l.get(column)) > value){
-                toReturn.add(l);
-            }
-        }
-
-        return toReturn;
-    }
 
 
 
