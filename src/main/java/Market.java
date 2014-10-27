@@ -8,8 +8,7 @@ public class Market {
     private ArrayList<Company> companies = new ArrayList();
 
     public void Market(){
-            //testagain
-     }
+                 }
 
 
     public int generateFromNewExtraction (List<RawData> _rawDataList) {
