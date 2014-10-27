@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by James on 25/10/2014.
@@ -29,7 +30,7 @@ public class CompanyData {
     private CalculatedData calculated;
 
 
-    public void CompanyData(){
+    public CompanyData(List rawCSVData){
 
         dateOfData = new Date ();
         calculated = new CalculatedData();

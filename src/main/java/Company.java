@@ -14,7 +14,7 @@ public class Company  {
     private CompanyData currentData;
     private List<CompanyData> historicalData;
 
-    public Company (){
+    public Company (List){
 
     }
 

@@ -15,6 +15,7 @@ import java.util.*;
 public class StockAnalyser{
 
     private List<List> stockData;
+    private Companies companies;
     List headers;
 
 
@@ -47,12 +48,39 @@ public class StockAnalyser{
 
         for(String[] c : tmp){
             stockData.add((List)Arrays.asList(c));
+
         }
 
         headers = (List) stockData.get(0);
         stockData.remove(headers);
 
     }
+
+
+
+    public void generateForDate(Date DateAtTimeOfExtraction){
+
+        for (List c : stockData){
+            Company existingCompany;
+            existingCompany = companies.FindBySymbol((String) c.get(1));
+
+            if (existingCompany.equals(null)) {
+                existingCompany = companies.CreateNewCompany(c);
+                            }
+
+            if (existingCompany.fetchDataForDate(DateAtTimeOfExtraction).equals(null)){
+                existingCompany.addToHistorical(new CompanyData(c));
+
+
+            }
+
+
+        }
+    }
+    // every list of data
+    // if company symbol is new, then create Company
+    // if data date for Company is new, add new CompanyData
+
 
 
     public void sortData(final int sortOnColumn) {
