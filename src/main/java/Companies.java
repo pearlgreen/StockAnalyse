@@ -8,27 +8,25 @@ import java.util.List;
  */
 public class Companies {
 
-    private ArrayList<Company> companies;
+    private ArrayList<Company> companies = new ArrayList();
 
     public Company FindBySymbol(String symbolToFind) {
 
-        Company foundCompany;
+           for (Company c : companies) {
+                if (symbolToFind.equals(c.getCompanySymbol())) ;
+                return c;
+            }
 
-        for (Company c : companies) {
-            if (symbolToFind.equals(c.getCompanySymbol())) ;
-            return c;
-        }
+            return null;
 
-
-        return null;
 
     }
 
-    public Company CreateNewCompany(List c) {
+    public Company CreateNewCompany(RawData c) {
 
-        Company newCompany = new Company(c);
-        if (this.FindBySymbol(newCompany.getCompanySymbol()).equals(null)
-                && newCompany.getCurrentData().getMarketCap()!=0) {
+        Company newCompany = new Company(c.parseSymbol(),c.parseName(),c.parseSector());
+        if (this.FindBySymbol(c.parseSymbol()).equals(null)
+                && (c.parseMarketCap() != 0)) {
             companies.add(newCompany);
             return newCompany;
 
@@ -55,4 +53,11 @@ public class Companies {
 
     }
 
+    public void AddCompany(Company company) {
+
+        if (FindBySymbol(company.getCompanySymbol())==null){
+            companies.add(company);
+
+        }
+            }
 }

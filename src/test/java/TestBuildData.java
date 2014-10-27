@@ -17,41 +17,20 @@ public class TestBuildData {
 
 
     @Test
-    public void Test_listIsCorrectlySorted() throws URISyntaxException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+    public void create_New_Company_and_add_to_Companies(){
 
-        StockAnalyser testData = new StockAnalyser();
+        Companies companies = new Companies();
+        Company company = new Company("XXX","The XXX Company", "Sector X");
 
-        ArrayList l = new ArrayList();
+        companies.AddCompany(company);
 
-        ArrayList firstCompany = new ArrayList();
-        firstCompany.add("2.0");
-        firstCompany.add("3.0");
+        Assert.assertEquals(company.getCompanySymbol(),"XXX");
+        Assert.assertEquals(companies.FindBySymbol("XXX"),company);
 
-        ArrayList secondCompany = new ArrayList();
-        secondCompany.add("2.5");
-        secondCompany.add("2.5");
-
-        ArrayList thirdCompany = new ArrayList();
-        thirdCompany.add("2.1");
-        thirdCompany.add("");
-
-        // l.add(1,new CSVRecord().add(new Float(2.0)));
-
-        l.add(firstCompany);
-        l.add(secondCompany);
-        l.add(thirdCompany);
-
-        testData.setStockData(l);
-
-        /*
-        testData.sortData(0);
-        Assert.assertEquals(testData.getStockData().get(0),firstCompany);
-
-        testData.sortData(1);
-        Assert.assertEquals(testData.getStockData().get(0),thirdCompany);
-
-        testData = null;*/
     }
+
+
+    
 
     @Test
     public void testListIsFilteredCorrectly(){

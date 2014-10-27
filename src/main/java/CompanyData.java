@@ -30,7 +30,7 @@ public class CompanyData {
     private CalculatedData calculated;
 
 
-    public CompanyData(List subSetOfCSVData){
+    public CompanyData(RawData subSetOfCSVData){
 
         dateOfData = new Date ();
         calculated = new CalculatedData();

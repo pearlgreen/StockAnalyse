@@ -14,7 +14,7 @@ import java.util.*;
 
 public class StockAnalyser{
 
-    private List<List> stockData;
+    private List<RawData> stockData;
     private Companies companies;
     List headers;
 
@@ -30,7 +30,7 @@ public class StockAnalyser{
     }
 
 
-    public void setStockData(List<List> listInput){
+    public void setStockData(List<RawData> listInput){
 
         this.stockData = listInput;
     }
@@ -46,7 +46,7 @@ public class StockAnalyser{
         List<String[]> tmp = (ArrayList) parser.readAll();
 
         for(String[] c : tmp){
-            stockData.add((List)Arrays.asList(c));
+            stockData.add((RawData)Arrays.asList(c));
 
         }
 
@@ -62,9 +62,9 @@ public class StockAnalyser{
 
     public void generateForDate(Date DateAtTimeOfExtraction){
 
-        for (List c : stockData){
+        for (RawData c : stockData){
             Company existingCompany;
-            existingCompany = companies.FindBySymbol((String) c.get(1));
+            existingCompany = companies.FindBySymbol((String) c.parseSymbol());
 
             if (existingCompany.equals(null)) {
                 existingCompany = companies.CreateNewCompany(c);
