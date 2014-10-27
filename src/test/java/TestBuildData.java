@@ -30,7 +30,7 @@ public class TestBuildData {
     }
 
 
-    
+
 
     @Test
     public void testListIsFilteredCorrectly(){
