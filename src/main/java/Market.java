@@ -8,7 +8,7 @@ public class Market {
     private ArrayList<Company> companies = new ArrayList();
 
     public void Market(){
-
+            //test
      }
 
 
