@@ -1,20 +1,25 @@
 
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.ObjectCodec;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 
 
 public class StockAnalyser{
 
-    private List<RawData> stockData;
+    private List stockData;
     private Market companies;
     List headers;
 
@@ -32,27 +37,28 @@ public class StockAnalyser{
     }
 
 
-    public void setStockData(List<RawData> listInput){
+    public void setStockData(List<List> listInput){
 
         this.stockData = listInput;
     }
 
 
     public void initialise() throws URISyntaxException, IOException {
-        //URL url = new URL("http://uk.advfn.com/p.php?pid=filterxdownload&show=1_1_,1_4_,1_2_,1_5_,1_8_,1_11_,1_10_,1_27_,1_89_,2_8_,2_18_,2_14_,2_62_,2_78_,2_79_,3_28_,3_30_,2_27_,2_21_,2_22_,2_45_,2_57_,2_23_,1_12_,1_13_,1_14_,1_87_,1_66_,1_20_,2_9_,2_75_,3_32_&sort=3_32_D&cnstr=&zip=0");
-        File file = new File("C:\\Users\\James\\Documents\\GitHub\\XmlGrab\\out\\temp.csv");
-        //org.apache.commons.io.FileUtils.copyURLToFile(url, file);
+        URL url = new URL("http://uk.advfn.com/p.php?pid=filterxdownload&show=1_1_,1_4_,1_2_,1_5_,1_8_,1_11_,1_10_,1_27_,1_89_,2_8_,2_18_,2_14_,2_62_,2_78_,2_79_,3_28_,3_30_,2_27_,2_21_,2_22_,2_45_,2_57_,2_23_,1_12_,1_13_,1_14_,1_87_,1_66_,1_20_,2_9_,2_75_,3_32_&sort=3_32_D&cnstr=&zip=0");
+        File file = new File("C:\\Users\\Public\\Documents\\temp.csv");
+        org.apache.commons.io.FileUtils.copyURLToFile(url, file);
         CSVReader parser = new CSVReader(new FileReader(file));
 
-        stockData = new ArrayList();
+        stockData = new ArrayList<RawData>();
         List<String[]> tmp = (ArrayList) parser.readAll();
 
         for(String[] c : tmp){
-            stockData.add((RawData)Arrays.asList(c));
+
+          stockData.add(Arrays.asList(c));
 
         }
 
-        headers = (List) stockData.get(0);
+        //headers =  stockData.get(0);
         stockData.remove(headers);
 
     }
@@ -89,6 +95,23 @@ public class StockAnalyser{
         return test;
 
     }*/
+
+
+    public void writeToFile() throws IOException {
+
+        JsonFactory factory = new JsonFactory();
+        JsonGenerator jGenerator = factory.createGenerator(new File("C:\\Users\\Public\\Documents\\out.tmp"), JsonEncoding.UTF8);
+        jGenerator.writeStartArray();
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        String e = mapper.writeValueAsString(stockData);
+        jGenerator.writeRaw(e);
+
+        jGenerator.writeEndArray();
+        jGenerator.close();
+           }
+
 
 }
 
