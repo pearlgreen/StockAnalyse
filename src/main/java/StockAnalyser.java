@@ -1,12 +1,8 @@
 
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.ObjectCodec;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -99,17 +95,29 @@ public class StockAnalyser{
 
     public void writeToFile() throws IOException {
 
-        JsonFactory factory = new JsonFactory();
-        JsonGenerator jGenerator = factory.createGenerator(new File("C:\\Users\\Public\\Documents\\out.tmp"), JsonEncoding.UTF8);
-        jGenerator.writeStartArray();
-        ObjectMapper mapper = new ObjectMapper();
+          JSONObject obj = new JSONObject();
+       // obj.put("name", "mkyong.com");
+       // obj.put("age", new Integer(100));
 
 
-        String e = mapper.writeValueAsString(stockData);
-        jGenerator.writeRaw(e);
 
-        jGenerator.writeEndArray();
-        jGenerator.close();
+        //JSONArray list = new JSONArray();
+        //list.add(stockData);
+
+        obj.put("companies",stockData);
+
+        try {
+
+            FileWriter file = new FileWriter("C:\\Users\\Public\\Documents\\temp.json");
+            file.write(obj.toJSONString());
+            file.flush();
+            file.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
            }
 
 

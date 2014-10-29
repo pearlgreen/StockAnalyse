@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -7,7 +8,11 @@ public class Market {
 
     private ArrayList<Company> companies = new ArrayList();
 
+    PersistenceHandler handler;
+
     public void Market(){
+
+
                  }
 
 
@@ -82,5 +87,28 @@ public class Market {
      }
 
 
+    public void SetPersistence(PersistenceHandler handlerObject) {
 
+        handler = handlerObject;
+
+    }
+
+    public void SaveMarkets(String _marketToSaveAs) {
+
+        handler.SaveMarketData(companies,_marketToSaveAs);
+
+    }
+
+    public void LoadCompanies(String _marketToLookFor) {
+
+        try {
+            System.out.println(handler.filename);
+
+            companies = handler.getMarketData(_marketToLookFor);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

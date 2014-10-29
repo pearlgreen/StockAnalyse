@@ -190,7 +190,7 @@ public class CompanyData {
 
     public double getMarketCap() {
         return
-                MarketCap;
+                    MarketCap;
     }
 
     public void setMarketCap(double marketCap) {
