@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Market {
 
-    private ArrayList<Company> companies = new ArrayList();
+    private ArrayList<Company> companies = new ArrayList<Company>();
 
     PersistenceHandler handler;
 
@@ -16,10 +16,12 @@ public class Market {
                  }
 
 
-    public int generateFromNewExtraction (List<RawData> _rawDataList) {
+    public int buildCompanies (List<RawData> _rawDataList) {
+
 
         int _timeOfExtraction = new GregorianCalendar().get(Calendar.DATE);
         int count=0;
+
 
         for (RawData c : _rawDataList) {
 
@@ -28,7 +30,7 @@ public class Market {
             if (company == null) {
 
                 company = new Company(c,_timeOfExtraction);
-                companies.add(company);
+                AddCompany(company);
                 count++;
 
                 }
@@ -46,16 +48,20 @@ public class Market {
 
     public Company FindBySymbol(String symbolToFind) {
 
-        for (Company c : companies) {
 
-            if (symbolToFind.equals(c.getCompanySymbol())) {
+        if (companies.size()!=0) {
+            for (Company c : companies) {
 
-                return c;
+                if (symbolToFind.equals(c.getCompanySymbol())) {
+
+                    return c;
+                }
             }
+            return null;
         }
+
         return null;
     }
-
 
     public void sortCompaniesBySymbol() {
 
@@ -78,7 +84,7 @@ public class Market {
     public void AddCompany(Company company) {
 
         if (FindBySymbol(company.getCompanySymbol())==null){
-            companies.add(company);
+           companies.add(company);
         }
             }
     
@@ -102,7 +108,7 @@ public class Market {
     public void LoadCompanies(String _marketToLookFor) {
 
         try {
-            System.out.println(handler.filename);
+            System.out.println(handler.buildFilename(_marketToLookFor));
 
             companies = handler.getMarketData(_marketToLookFor);
         } catch (IOException e) {

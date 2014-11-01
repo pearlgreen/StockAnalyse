@@ -10,6 +10,12 @@ public class RawData extends ArrayList implements List  {
     public String _sector;
     public double _marketCap;
 
+public void RawData(String[] headers, String[] input_data){
 
+
+
+
+
+}
 
 }

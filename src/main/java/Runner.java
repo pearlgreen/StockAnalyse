@@ -13,6 +13,7 @@ import java.util.Date;
 public class Runner  {
 
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, URISyntaxException, XPathExpressionException {
+
         StockAnalyser test = new StockAnalyser();
 
         test.initialise();

@@ -4,16 +4,47 @@
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 
 public class TestBuildData {
+
+  Market market = new Market();
+
+
+    @Test
+    public void Build_Raw_Data_From_String_Array(){
+
+       String [] string_array = new String [3];
+       string_array[0]="company_name";
+       string_array[0]="bbb";
+       string_array[0]="ccc";
+
+       RawData rawData = new RawData(string_array);
+
+       Assert.assertEquals("company_name",rawData._companyName);
+
+    }
+
+
+    @Test
+    public void Validate_RawData_Object(){
+
+
+
+    }
+
+
+    @Test
+    public void Cannot_Build_Raw_Data(){
+
+
+    }
 
 
     @Test
@@ -27,7 +58,9 @@ public class TestBuildData {
 
         Company company = new Company(testData,new GregorianCalendar().get(Calendar.DATE));
 
-        Assert.assertEquals(null,company.fetchDataForDate(new GregorianCalendar(1900,1,1).get(Calendar.DATE)));
+        CompanyData data = company.fetchDataForDate(19000101);
+
+        Assert.assertNull(data);
 
     }
 
@@ -76,12 +109,15 @@ public class TestBuildData {
         listOfData.add(testData3);
         listOfData.add(testData3);
 
-        int companiesAdded = marketToTest.generateFromNewExtraction(listOfData);
+        int companiesAdded = marketToTest.buildCompanies(listOfData);
 
-        Assert.assertEquals(2,companiesAdded);
+
+        Assert.assertEquals(2, companiesAdded);
         Assert.assertEquals(2,marketToTest.getNoOfCompanies());
 
              }
+
+
 
     @Test
     public void New_CompanyData_Added(){
@@ -98,9 +134,8 @@ public class TestBuildData {
         listOfData.add(testData1);
 
 
-        marketToTest.generateFromNewExtraction(listOfData);
+        marketToTest.buildCompanies(listOfData);
         CompanyData actualData = marketToTest.FindBySymbol("XXX").fetchDataForDate(new GregorianCalendar().get(Calendar.DATE));
-
 
         CompanyData expectedData = new CompanyData(testData1, new GregorianCalendar().get(Calendar.DATE));
 

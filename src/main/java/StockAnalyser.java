@@ -15,14 +15,14 @@ import java.util.*;
 
 public class StockAnalyser{
 
-    private List stockData;
-    private Market companies;
+    private  List<RawData>  stockData;
+    private Market market;
     List headers;
 
 
     public StockAnalyser() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
 
-    companies = new Market();
+    market = new Market();
 
     }
 
@@ -33,7 +33,7 @@ public class StockAnalyser{
     }
 
 
-    public void setStockData(List<List> listInput){
+    public void setStockData(List<RawData> listInput){
 
         this.stockData = listInput;
     }
@@ -50,12 +50,14 @@ public class StockAnalyser{
 
         for(String[] c : tmp){
 
-          stockData.add(Arrays.asList(c));
+          stockData.add((RawData)Arrays.asList(c));
 
         }
 
         //headers =  stockData.get(0);
         stockData.remove(headers);
+        //market.generateFromNewExtraction(stockData);
+
 
     }
 
@@ -95,27 +97,7 @@ public class StockAnalyser{
 
     public void writeToFile() throws IOException {
 
-          JSONObject obj = new JSONObject();
-       // obj.put("name", "mkyong.com");
-       // obj.put("age", new Integer(100));
-
-
-
-        //JSONArray list = new JSONArray();
-        //list.add(stockData);
-
-        obj.put("companies",stockData);
-
-        try {
-
-            FileWriter file = new FileWriter("C:\\Users\\Public\\Documents\\temp.json");
-            file.write(obj.toJSONString());
-            file.flush();
-            file.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        market.SaveMarkets("ftse");
 
 
            }
