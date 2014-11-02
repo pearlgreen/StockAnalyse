@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 
-public class TestBuildData {
+public class TestMarket {
 
   Market market = new Market();
 
@@ -25,7 +25,7 @@ public class TestBuildData {
        string_array[0]="bbb";
        string_array[0]="ccc";
 
-       RawData rawData = new RawData(string_array);
+       RawData rawData = new RawData();
 
        Assert.assertEquals("company_name",rawData._companyName);
 

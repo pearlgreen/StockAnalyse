@@ -1,20 +1,17 @@
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit38ClassRunner;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by J on 29-Oct-2014.
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestJSonParsing {
+public class TestPersistenceHandler {
 
     @Mock
     PersistenceHandler jsonhandler;
