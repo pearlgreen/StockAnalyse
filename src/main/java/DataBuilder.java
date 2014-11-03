@@ -6,23 +6,19 @@ import java.util.List;
  */
 public class DataBuilder {
 
-   final int DATASET_SIZE = 31;
+   final int DATASET_SIZE = 41;
 
    private static final int SYMBOL_COLUMN = 1;
-
-
-    private String symbol;
+    List<RawData> listOfDataObjects = new ArrayList<RawData>();
 
 
     public DataBuilder(String[] array) throws  InvalidInputDataException{
 
         if (array.length != DATASET_SIZE){
 
-            throw new InvalidInputDataException(array.length);
+            throw new InvalidInputDataException("Input data array is of size: " + array.length + " and not the required " + DATASET_SIZE);
 
         }
-
-
     }
 
     public DataBuilder(InputHandler input) {
@@ -38,26 +34,27 @@ public class DataBuilder {
 
             if (s.length != DATASET_SIZE){
 
-                throw new InvalidInputDataException(s.length);
+                throw new InvalidInputDataException("Input data array is of size: " + s.length + " and not the required " + DATASET_SIZE);
             }
 
-            RawData rawData = new RawData();
 
-            if(!s[SYMBOL_COLUMN].isEmpty()) setSymbol(s[SYMBOL_COLUMN]);
-            else throw new InvalidInputDataException("Array SYMBOL_COLUMN is empty");
+            if(s[SYMBOL_COLUMN-1].isEmpty()); throw new InvalidInputDataException("Array SYMBOL_COLUMN is empty");
+
+
+
+           // RawData rawData = new RawData();
+
+           // listOfDataObjects.add(rawData);
         }
 
-    }
+        }
 
-    public ArrayList<RawData> fetchData() {
 
-       ArrayList<RawData> list = new ArrayList<RawData>();
 
-    return list;
-    }
 
-    public void setSymbol(String _symbol) {
+    public List<RawData> fetchDataValidDataObject() {
 
-        this.symbol = _symbol;
+        return listOfDataObjects;
+
     }
 }

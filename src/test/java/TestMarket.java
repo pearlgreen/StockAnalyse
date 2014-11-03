@@ -27,9 +27,9 @@ public class TestMarket {
 
        RawData rawData = new RawData();
 
-       Assert.assertEquals("company_name",rawData._companyName);
+       Assert.assertEquals("company_name",rawData.getCompany_name());
 
-    }
+}
 
 
     @Test
@@ -52,9 +52,9 @@ public class TestMarket {
 
 
         RawData testData = new RawData();
-        testData._companyName="The Test Company";
-        testData._sector="Sector X";
-        testData._symbol="XXX";
+        testData.setCompany_name("The Test Company");
+        testData.setSector("Sector X");
+        testData.setSymbol("XXX");
 
         Company company = new Company(testData,new GregorianCalendar().get(Calendar.DATE));
 
@@ -68,9 +68,9 @@ public class TestMarket {
     public void Create_New_Company_and_Add_to_Companies(){
 
         RawData testData = new RawData();
-        testData._companyName="The Test Company";
-        testData._sector="Sector X";
-        testData._symbol="XXX";
+        testData.setCompany_name("The Test Company");
+        testData.setSector("Sector X");
+        testData.setSymbol("XXX");
 
         Market ftse = new Market();
         Company company = new Company(testData,new GregorianCalendar().get(Calendar.DATE));
@@ -90,19 +90,19 @@ public class TestMarket {
         List<RawData> listOfData = new ArrayList<RawData>();
 
         RawData testData1 = new RawData();
-        testData1._companyName="The Test Company";
-        testData1._sector="Sector X";
-        testData1._symbol="XXX";
+       // testData1._companyName="The Test Company";
+       // testData1._sector="Sector X";
+       // testData1._symbol="XXX";
 
         RawData testData2 = new RawData();
-        testData2._companyName="The Test Company";
-        testData2._sector="Sector X";
-        testData2._symbol="XXX";
+        //testData2._companyName="The Test Company";
+        //testData2._sector="Sector X";
+        //testData2._symbol="XXX";
 
         RawData testData3 = new RawData();
-        testData3._companyName="The Test Company";
-        testData3._sector="Sector Y";
-        testData3._symbol="YYY";
+        //testData3._companyName="The Test Company";
+        //testData3._sector="Sector Y";
+        //testData3._symbol="YYY";
 
         listOfData.add(testData1);
         listOfData.add(testData2);
@@ -127,10 +127,13 @@ public class TestMarket {
         List<RawData> listOfData = new ArrayList<RawData>();
 
         RawData testData1 = new RawData();
-        testData1._companyName="The Test Company";
-        testData1._sector="Sector X";
-        testData1._symbol="XXX";
-        testData1._marketCap=123.45;
+        try {
+            DataBuilder dataBuilder=new DataBuilder(new String[31]);
+        } catch (InvalidInputDataException e) {
+            e.printStackTrace();
+        }
+
+
         listOfData.add(testData1);
 
 

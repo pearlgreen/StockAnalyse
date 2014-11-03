@@ -34,7 +34,7 @@ public class CompanyData {
 
         dateOfData = _dateOfData;
         calculated = new CalculatedData();
-        this.setMarketCap(subSetOfCSVData._marketCap);
+        this.setMarketCap(subSetOfCSVData.getMarketCap());
         //this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
 
 

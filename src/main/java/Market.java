@@ -25,7 +25,7 @@ public class Market {
 
         for (RawData c : _rawDataList) {
 
-            Company company = this.FindBySymbol(c._symbol);
+            Company company = this.FindBySymbol(c.getSymbol());
 
             if (company == null) {
 

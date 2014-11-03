@@ -19,9 +19,9 @@ public class Company  {
     public Company(RawData _dataIn, int dateOfCreation) {
 
         this.dateOfCreation = dateOfCreation;
-        this.setCompanySymbol(_dataIn._symbol);
-        this.setCompanyName(_dataIn._companyName);
-        this.setSector(_dataIn._sector);
+        this.setCompanySymbol(_dataIn.getSymbol());
+        this.setCompanyName(_dataIn.getCompany_name());
+        this.setSector(_dataIn.getSector());
 
         currentData = new CompanyData(_dataIn, dateOfCreation);
         historicalData = new ArrayList<CompanyData>();

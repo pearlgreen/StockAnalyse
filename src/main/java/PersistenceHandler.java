@@ -85,7 +85,7 @@ public class PersistenceHandler {
         JSONObject jsonObject = (JSONObject) obj;
 
         RawData data = new RawData();
-        data._companyName = (String) jsonObject.get(market);
+        data.setCompany_name((String) jsonObject.get(market));
 
         ArrayList<Company> marketData = new ArrayList<Company>();
         marketData.add(new Company(data,20140101)) ;
