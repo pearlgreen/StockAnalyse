@@ -1,6 +1,3 @@
-import java.util.Date;
-import java.util.List;
-
 /**
  * Created by James on 25/10/2014.
  */
@@ -30,7 +27,7 @@ public class CompanyData {
     private CalculatedData calculated;
 
 
-    public CompanyData(RawData subSetOfCSVData, int _dateOfData){
+    public CompanyData(DataObject subSetOfCSVData, int _dateOfData){
 
         dateOfData = _dateOfData;
         calculated = new CalculatedData();

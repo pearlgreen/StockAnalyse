@@ -84,11 +84,11 @@ public class PersistenceHandler {
         }
         JSONObject jsonObject = (JSONObject) obj;
 
-        RawData data = new RawData();
-        data.setCompany_name((String) jsonObject.get(market));
+        //DataObject data = new DataObject();
+        //data.setCompany_name((String) jsonObject.get(market));
 
         ArrayList<Company> marketData = new ArrayList<Company>();
-        marketData.add(new Company(data,20140101)) ;
+        //marketData.add(new Company(data,20140101)) ;
 
        fileIn.close();
 

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class Company  {
     private List<CompanyData> historicalData;
 
 
-    public Company(RawData _dataIn, int dateOfCreation) {
+    public Company(DataObject _dataIn, int dateOfCreation) {
 
         this.dateOfCreation = dateOfCreation;
         this.setCompanySymbol(_dataIn.getSymbol());

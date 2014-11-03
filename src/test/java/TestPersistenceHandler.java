@@ -20,12 +20,12 @@ public class TestPersistenceHandler {
     public void TestThatCompanyObjectWrittenAndReadFromJSON() {
 
 
-        Company company = new Company(new RawData(),20140101);
-        company.setCompanySymbol("TEST");
-        company.setCompanyName("TESTNAME");
+        //Company company = new Company(new DataObject(),20140101);
+        // company.setCompanySymbol("TEST");
+        // company.setCompanyName("TESTNAME");
 
         Market market = new Market();
-        market.AddCompany(company);
+        //  market.AddCompany(company);
 
         market.SetPersistence(jsonhandler);
         market.SaveMarkets("ftse");

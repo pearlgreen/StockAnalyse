@@ -1,8 +1,6 @@
 
 
 import au.com.bytecode.opencsv.CSVReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,7 +13,7 @@ import java.util.*;
 
 public class StockAnalyser{
 
-    private  List<RawData>  stockData;
+    private  List<DataObject>  stockData;
     private Market market;
     List headers;
 
@@ -33,7 +31,7 @@ public class StockAnalyser{
     }
 
 
-    public void setStockData(List<RawData> listInput){
+    public void setStockData(List<DataObject> listInput){
 
         this.stockData = listInput;
     }
@@ -45,12 +43,12 @@ public class StockAnalyser{
         org.apache.commons.io.FileUtils.copyURLToFile(url, file);
         CSVReader parser = new CSVReader(new FileReader(file));
 
-        stockData = new ArrayList<RawData>();
+        stockData = new ArrayList<DataObject>();
         List<String[]> tmp = (ArrayList) parser.readAll();
 
         for(String[] c : tmp){
 
-          stockData.add((RawData)Arrays.asList(c));
+          stockData.add((DataObject)Arrays.asList(c));
 
         }
 

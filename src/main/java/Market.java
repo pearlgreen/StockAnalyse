@@ -16,14 +16,14 @@ public class Market {
                  }
 
 
-    public int buildCompanies (List<RawData> _rawDataList) {
+    public int buildCompanies (List<DataObject> _DataObjectList) {
 
 
         int _timeOfExtraction = new GregorianCalendar().get(Calendar.DATE);
         int count=0;
 
 
-        for (RawData c : _rawDataList) {
+        for (DataObject c : _DataObjectList) {
 
             Company company = this.FindBySymbol(c.getSymbol());
 
