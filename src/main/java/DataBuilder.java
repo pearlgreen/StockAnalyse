@@ -16,7 +16,7 @@ public class DataBuilder {
 
     public DataBuilder(List<String[]> listOfArrays) throws  InvalidInputDataException {
 
-        if (listOfArrays.isEmpty()) throw new InvalidInputDataException("Input ArrayList is empty");
+        if (listOfArrays.isEmpty()) throw new InvalidInputDataException("DataBuilder : Input ArrayList is empty");
 
         for (String[] s : listOfArrays){
 
@@ -26,7 +26,7 @@ public class DataBuilder {
                 dataObject = new DataObject(s);
                 listOfDataObjects.add(dataObject);
             } catch (InvalidInputDataException e) {
-              System.out.println("Problem creating new DataObject");
+              System.out.println("DataBuilder : Problem creating new DataObject");
             }
 
 

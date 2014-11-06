@@ -1,6 +1,7 @@
 import org.junit.Assert;
 
 import org.junit.*;
+import sun.invoke.empty.Empty;
 
 import java.util.*;
 
@@ -15,6 +16,10 @@ import static org.junit.Assert.fail;
 public class TestDataBuilder {
 
     ArrayList<String[]> listOfArrays = new ArrayList<>();
+
+    String[] valid_data = {"TSCO","Tesco","14292.4","14.58","8122.99","8.39","0.82","3.55","0.06","4.49","1","6.86","27029.4",
+            "","3185","7.54","1.03","0.88","1.53","683.77","","32936","-188.65","7.29","27.81","0.22","387","63557","20206","14043",
+            "2506","3795","2487","9190","-2447","134.43","20140222","GB0008847096","175.95","FOOD & DRUG RETAILERS","974"};
 
     @Test
     public void New_DataBuilder_Accepts_ListOfStringArrays(){
@@ -108,6 +113,34 @@ public class TestDataBuilder {
     public void DataBuilder_FetchData_List_Without_Duplicate_DataObject(){
 
         DataBuilder dataBuilder = null;
+
+
+    }
+
+    @Test
+    public void DataBuilder_Parses_And_Sets_Correct_Data() {
+
+        List<String[]> smallerListOfArrays = new ArrayList<String[]>();
+         smallerListOfArrays.add(valid_data);
+
+        DataBuilder dataBuilder =null;
+        DataObject dataObjectUT = null;
+        try {
+            dataBuilder = new DataBuilder(smallerListOfArrays);
+
+        } catch (InvalidInputDataException e) {
+            System.out.println(e.getErrorMessage());
+            fail(e.getErrorMessage());
+        }
+
+
+        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObject();
+        dataObjectUT = dataObjects.get(0);
+
+        Assert.assertTrue(dataObjects.size()==1);
+        Assert.assertNotNull(dataObjectUT);
+        Assert.assertEquals("TSCO", dataObjectUT.getSymbol());
+        Assert.assertEquals(7.54, dataObjectUT.getRoce(),0);
 
 
     }
