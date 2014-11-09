@@ -25,9 +25,11 @@ public class TestMarket {
        string_array[0]="bbb";
        string_array[0]="ccc";
 
+        DataValidator dataValidator = new DataValidator();
+
         DataObject dataObject = null;
         try {
-            dataObject = new DataObject(string_array);
+            dataObject = new DataObject(string_array, dataValidator);
         } catch (InvalidInputDataException e) {
             e.printStackTrace();
         }

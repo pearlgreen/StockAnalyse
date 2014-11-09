@@ -12,6 +12,7 @@ public class InvalidInputDataException extends Throwable {
     public InvalidInputDataException(String s) {
 
         this.message = s;
+        System.out.println(this.message);
 
     }
 

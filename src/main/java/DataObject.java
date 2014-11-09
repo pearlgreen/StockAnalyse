@@ -7,27 +7,63 @@ import java.util.*;
  */
 public class DataObject {
 
+    final int DATASET_SIZE = 41;
+    private final DataValidator dataValidator;
+    String[] validDataSet;
+
     private String symbol;
     private String company_name;
     private String sector;
+    private String isin;
+    private String industry;
+
     private double marketCap;
     private int creationDate;
     private double roce;
-
-   final int DATASET_SIZE = 41;
-    String[] validDataSet;
     private double pe_ratio;
     private double shares;
     private double div_yield;
     private double div_cover;
     private double op_margin;
     private double spread;
+    private double price_to_cash;
+    private double earning_drops;
+    private double earnings_yield;
+    private double earnings_grwth;
+    private double enterprise_val;
+    private double five_yr_grwth;
+    private double change_from_1yr;
+    private double change_from_low;
+    private double current_ratio;
+    private double credit_short;
+    private double credit_long;
+    private double cash_equivs;
+    private double current_assets;
+    private double retained_cash;
+    private double results_date;
+    private double attributed_profit;
+    private double operations;
+    private double debt_to_equity;
+    private double debtors;
+    private double net_margin;
+    private double net_debt;
+    private double net_work_capital;
+    private double net_tang_assets;
+    private double latest_price;
+    private double price_to_sales;
+    private double intangibles;
+    private double pre_tax_profit;
+    private double turnover;
 
 
-    public DataObject(String[] inputArray) throws InvalidInputDataException {
+
+    public DataObject(String[] inputArray, DataValidator _dataValidator) throws InvalidInputDataException {
+
+        dataValidator = _dataValidator;
 
 
-        if (inputArray.length != DATASET_SIZE)  throw new InvalidInputDataException("Input data array is of size: " + inputArray.length + " and not the required " + DATASET_SIZE);
+        if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("Input data array is of incorrect size:" +
+                " " + inputArray.length + " and not the required " + dataValidator.getExpectedDatasetSize());
 
         List errors = validateDataFields(inputArray);
 
@@ -51,39 +87,39 @@ public class DataObject {
         pe_ratio = Double.parseDouble(validDataSet[PERATIO_COLUMN]);
         shares = Double.parseDouble(validDataSet[SHARES_COLUMN]);
         div_yield = Double.parseDouble(validDataSet[DIVYIELD_COLUMN]);
-        div_cover= validDataSet[DIVCOVER_COLUMN];
-        op_margin = validDataSet[OPMARGIN_COLUMN];
-        spread = validDataSet[SPREAD];
-        price_to_cash= validDataSet[PRICETOCASH];
-        earning_drops=validDataSet[EARNDROPS];
-        earnings_yield=validDataSet[EARNSYIELD];
-        enterprise_val=validDataSet[ENTVALUE];
-        five_yr_grwth=validDataSet[FIVEYRGRTH];
-        operations=validDataSet[OPERATIONS];
-        debt_to_equity=validDataSet[DBTEQUITY];
-        current_ratio=validDataSet[CURRENT];
-        net_margin = validDataSet[NETMARGIN];
-        earnings_grwth=validDataSet[EARNGWTH];
-        net_debt=validDataSet[NETDEBT];
-        change_from_1yr=validDataSet[ONEYRCHNG];
-        change_from_low=validDataSet[CHNGLOW];
-        pre_tax_profit=validDataSet[PRETAXPFT];
-        price_to_sales=validDataSet[PRCTOSALES];
-        retained_cash=validDataSet[RETAINCASH];
-        turnover=validDataSet[TURNOVER];
-        credit_short=validDataSet[CREDITSHRT];
-        credit_long=validDataSet[CREDITLONG];
-        cash_equivs=validDataSet[CASHEQUIV];
-        intangibles=validDataSet[INTANGBLES];
-        current_assets=validDataSet[CURRENTASSTS];
-        debtors=validDataSet[DEBTORS];
-        net_work_capital=validDataSet[NETWKNGCAPIT];
-        net_tang_assets=validDataSet[NTTANGASSTVL];
-        results_date=validDataSet[RSLTPRDDATE];
+        div_cover= Double.parseDouble(validDataSet[DIVCOVER_COLUMN]);
+        op_margin = Double.parseDouble(validDataSet[OPMARGIN_COLUMN]);
+        spread = Double.parseDouble(validDataSet[SPREAD]);
+        price_to_cash= Double.parseDouble(validDataSet[PRICETOCASH]);
+        earning_drops= Double.parseDouble(validDataSet[EARNDROPS]);
+        earnings_yield= Double.parseDouble(validDataSet[EARNSYIELD]);
+        enterprise_val= Double.parseDouble(validDataSet[ENTVALUE]);
+        five_yr_grwth= Double.parseDouble(validDataSet[FIVEYRGRTH]);
+        operations= Double.parseDouble(validDataSet[OPERATIONS]);
+        debt_to_equity= Double.parseDouble(validDataSet[DBTEQUITY]);
+        current_ratio= Double.parseDouble(validDataSet[CURRENT]);
+        net_margin = Double.parseDouble(validDataSet[NETMARGIN]);
+        earnings_grwth= Double.parseDouble(validDataSet[EARNGWTH]);
+        net_debt= Double.parseDouble(validDataSet[NETDEBT]);
+        change_from_1yr= Double.parseDouble(validDataSet[ONEYRCHNG]);
+        change_from_low= Double.parseDouble(validDataSet[CHNGLOW]);
+        pre_tax_profit= Double.parseDouble(validDataSet[PRETAXPFT]);
+        price_to_sales= Double.parseDouble(validDataSet[PRCTOSALES]);
+        retained_cash= Double.parseDouble(validDataSet[RETAINCASH]);
+        turnover= Double.parseDouble(validDataSet[TURNOVER]);
+        credit_short= Double.parseDouble(validDataSet[CREDITSHRT]);
+        credit_long= Double.parseDouble(validDataSet[CREDITLONG]);
+        cash_equivs= Double.parseDouble(validDataSet[CASHEQUIV]);
+        intangibles= Double.parseDouble(validDataSet[INTANGBLES]);
+        current_assets= Double.parseDouble(validDataSet[CURRENTASSTS]);
+        debtors= Double.parseDouble(validDataSet[DEBTORS]);
+        net_work_capital= Double.parseDouble(validDataSet[NETWKNGCAPIT]);
+        net_tang_assets= Double.parseDouble(validDataSet[NTTANGASSTVL]);
+        results_date= Double.parseDouble(validDataSet[RSLTPRDDATE]);
         isin= validDataSet[ISIN];
-        latest_price=validDataSet[LATEST_PRICE];
+        latest_price= Double.parseDouble(validDataSet[LATEST_PRICE]);
         industry=validDataSet[INDUSTRY];
-        attributed_profit=validDataSet[ATTRIB_PRFT];
+        attributed_profit= Double.parseDouble(validDataSet[ATTRIB_PRFT]);
 
 
 

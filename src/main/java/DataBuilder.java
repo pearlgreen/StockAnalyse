@@ -8,6 +8,7 @@ public class DataBuilder {
 
 
     List<DataObject> listOfDataObjects = new ArrayList<DataObject>();
+    DataValidator dataValidator = new DataValidator();
 
 
     public DataBuilder(InputHandler input) {
@@ -22,8 +23,8 @@ public class DataBuilder {
 
             DataObject dataObject;
             try {
-             dataObject = new DataObject(s);
-                dataObject = new DataObject(s);
+             dataObject = new DataObject(s, dataValidator);
+                dataObject = new DataObject(s, dataValidator);
                 listOfDataObjects.add(dataObject);
             } catch (InvalidInputDataException e) {
               System.out.println("DataBuilder : Problem creating new DataObject");
