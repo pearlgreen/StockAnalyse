@@ -11,8 +11,8 @@ public class   DataValidator {
         this.expectedDatasetSize = _expectedDatasetSize;
     }
 
-    public boolean validCriticalFields(String[] array) {
-        return true;
+    public List validateFields(String[] array) {
+        return new ArrayList<String>();
     }
 
 
@@ -32,9 +32,5 @@ public class   DataValidator {
 
             }
 
-    public List validateDataFields(String[] inputArray) {
-        //always valid - returns no errors
-        return new ArrayList<String>();
 
-    }
 }

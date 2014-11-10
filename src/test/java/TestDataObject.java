@@ -4,6 +4,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,8 +73,11 @@ public class TestDataObject {
 
         String[] array = new String[1];
 
-        stub(mockedDataValidator.validCriticalFields(array)).toReturn(false);
-        stub(mockedDataValidator.getExpectedDatasetSize()).toReturn(1);
+        ArrayList mockErrorsList = new ArrayList<String>();
+        mockErrorsList.add("One Parse Error");
+
+        stub(mockedDataValidator.validateFields(array)).toReturn(mockErrorsList);
+        stub(mockedDataValidator.validDatasetSize(array)).toReturn(true);
 
         try{
             DataObject dataObject = new DataObject(array, mockedDataValidator);
@@ -78,7 +86,7 @@ public class TestDataObject {
 
             Mockito.verify(mockedDataValidator).validDatasetSize(array);
             assertThat(e, instanceOf(InvalidInputDataException.class));
-            Assert.assertTrue(e.getErrorMessage().contains("Input data is invalid/empty at SYMBOL_COLUMN"));
+            Assert.assertTrue(e.getErrorMessage().contains("Input data at 1 column(s) are incorrect"));
         }
 
 

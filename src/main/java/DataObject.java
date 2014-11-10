@@ -65,8 +65,7 @@ public class DataObject {
         if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("Input data array is of incorrect size:" +
                 " " + inputArray.length + " and not the required " + dataValidator.getExpectedDatasetSize());
 
-        List errors = dataValidator.validateDataFields(inputArray);
-
+        List errors = dataValidator.validateFields(inputArray);
 
          if (errors.isEmpty()){
 
@@ -74,7 +73,7 @@ public class DataObject {
              copyToFields();
         }
 
-        else throw new InvalidInputDataException("DataObject : Input data at column(s) " + errors.size() + " are incorrect");
+        else throw new InvalidInputDataException("DataObject : Input data at " + errors.size() + " column(s) are incorrect");
 
     }
 
