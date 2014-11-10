@@ -65,13 +65,13 @@ public class DataObject {
         if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("Input data array is of incorrect size:" +
                 " " + inputArray.length + " and not the required " + dataValidator.getExpectedDatasetSize());
 
-        List errors = validateDataFields(inputArray);
+        List errors = dataValidator.validateDataFields(inputArray);
 
 
-        if (errors.isEmpty()){
+         if (errors.isEmpty()){
 
-            validDataSet = inputArray ;
-            copyToFields();
+             validDataSet = inputArray ;
+             copyToFields();
         }
 
         else throw new InvalidInputDataException("DataObject : Input data at column(s) " + errors.size() + " are incorrect");
@@ -94,7 +94,7 @@ public class DataObject {
         earning_drops= Double.parseDouble(validDataSet[EARNDROPS]);
         earnings_yield= Double.parseDouble(validDataSet[EARNSYIELD]);
         enterprise_val= Double.parseDouble(validDataSet[ENTVALUE]);
-        five_yr_grwth= Double.parseDouble(validDataSet[FIVEYRGRTH]);
+        //five_yr_grwth= Double.parseDouble(validDataSet[FIVEYRGRTH]);
         operations= Double.parseDouble(validDataSet[OPERATIONS]);
         debt_to_equity= Double.parseDouble(validDataSet[DBTEQUITY]);
         current_ratio= Double.parseDouble(validDataSet[CURRENT]);

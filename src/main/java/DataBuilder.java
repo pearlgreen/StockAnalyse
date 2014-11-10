@@ -8,14 +8,17 @@ public class DataBuilder {
 
 
     List<DataObject> listOfDataObjects = new ArrayList<DataObject>();
-    DataValidator dataValidator = new DataValidator();
+    DataValidator dataValidator;
 
 
-    public DataBuilder(InputHandler input) {
+    public DataBuilder(InputHandler input,DataValidator _dataValidator) {
 
+        dataValidator = _dataValidator;
     }
 
-    public DataBuilder(List<String[]> listOfArrays) throws  InvalidInputDataException {
+    public DataBuilder(List<String[]> listOfArrays,DataValidator _dataValidator) throws  InvalidInputDataException {
+
+        dataValidator = _dataValidator;
 
         if (listOfArrays.isEmpty()) throw new InvalidInputDataException("DataBuilder : Input ArrayList is empty");
 
@@ -40,7 +43,7 @@ public class DataBuilder {
 
 
 
-    public List<DataObject> fetchDataValidDataObject() {
+    public List<DataObject> fetchDataValidDataObjects() {
 
         return listOfDataObjects;
 

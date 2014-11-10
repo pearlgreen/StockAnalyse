@@ -1,7 +1,12 @@
 import org.junit.Assert;
 
 import org.junit.*;
-import sun.invoke.empty.Empty;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+import static org.mockito.Mockito.stub;
 
 import java.util.*;
 
@@ -13,6 +18,7 @@ import static org.junit.Assert.fail;
 /**
  * Created by J on 02-Nov-2014.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestDataBuilder {
 
     ArrayList<String[]> listOfArrays = new ArrayList<>();
@@ -20,6 +26,12 @@ public class TestDataBuilder {
     String[] valid_data = {"TSCO","Tesco","14292.4","14.58","8122.99","8.39","0.82","3.55","0.06","4.49","1","6.86","27029.4",
             "","3185","7.54","1.03","0.88","1.53","683.77","","32936","-188.65","7.29","27.81","0.22","387","63557","20206","14043",
             "2506","3795","2487","9190","-2447","134.43","20140222","GB0008847096","175.95","FOOD & DRUG RETAILERS","974"};
+
+    DataValidator dataValidator = new DataValidator(valid_data.length);
+
+
+    @Mock
+    DataValidator stubbedDataValidator;
 
     @Test
     public void New_DataBuilder_Accepts_ListOfStringArrays(){
@@ -32,7 +44,7 @@ public class TestDataBuilder {
         listOfArrays.add(array2);
 
         try {
-            new DataBuilder(listOfArrays);
+            new DataBuilder(listOfArrays,stubbedDataValidator);
         } catch (InvalidInputDataException e) {
             fail(e.getMessage());
         }
@@ -44,7 +56,8 @@ public class TestDataBuilder {
 
        InputHandler input = new InputHandler();
 
-        new DataBuilder(input);
+
+        new DataBuilder(input,stubbedDataValidator);
     }
 
 
@@ -56,13 +69,14 @@ public class TestDataBuilder {
 
         DataBuilder dataBuilder = null;
         try {
-            dataBuilder = new DataBuilder(listOfArrays);
+            dataBuilder = new DataBuilder(listOfArrays,stubbedDataValidator);
         } catch (InvalidInputDataException e) {
             e.printStackTrace();
         }
 
-        List obj = dataBuilder.fetchDataValidDataObject();
+        List obj = dataBuilder.fetchDataValidDataObjects();
 
+    //    Mockito.verify(stubbedDataValidator.validDatasetSize(array));
         Assert.assertEquals(true, obj.isEmpty());
 
     }
@@ -73,7 +87,7 @@ public class TestDataBuilder {
 
         DataBuilder dataBuilder = null;
         try {
-            dataBuilder = new DataBuilder(new ArrayList<String[]>());
+            dataBuilder = new DataBuilder(new ArrayList<String[]>(),stubbedDataValidator);
             fail("Should have thrown InvalidInputDataException");
         } catch (InvalidInputDataException e) {
             assertThat(e, instanceOf(InvalidInputDataException.class));
@@ -87,16 +101,19 @@ public class TestDataBuilder {
 
         String[] array = {};
         listOfArrays.add(array);
+        stub(stubbedDataValidator.getExpectedDatasetSize()).toReturn(1);
 
 
         DataBuilder dataBuilder = null;
+
+
         try {
-            dataBuilder = new DataBuilder(listOfArrays);
+            dataBuilder = new DataBuilder(listOfArrays,stubbedDataValidator);
         } catch (InvalidInputDataException e) {
             e.printStackTrace();
         }
 
-        Object obj = dataBuilder.fetchDataValidDataObject();
+        Object obj = dataBuilder.fetchDataValidDataObjects();
 
         assertThat(obj, instanceOf(ArrayList.class));
     }
@@ -117,16 +134,37 @@ public class TestDataBuilder {
 
     }
 
+
     @Test
-    public void DataBuilder_Parses_And_Sets_Correct_Data() {
+    public void DataBuilder_Parses_And_Returns_Non_Empty_List_Of_Data() {
+
+        List<String[]> smallerListOfArrays = new ArrayList<String[]>();
+        smallerListOfArrays.add(valid_data);
+
+        DataBuilder dataBuilder=null;
+        try {
+            dataBuilder = new DataBuilder(smallerListOfArrays,dataValidator);
+
+        } catch (InvalidInputDataException e) {
+            System.out.println(e.getErrorMessage());
+            fail(e.getErrorMessage());
+        }
+
+        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObjects();
+        Assert.assertFalse(dataObjects.isEmpty());
+
+    }
+
+    @Test
+    public void DataBuilder_Parses_And_Returns_Data_Object() {
 
         List<String[]> smallerListOfArrays = new ArrayList<String[]>();
          smallerListOfArrays.add(valid_data);
+        DataBuilder dataBuilder=null;
 
-        DataBuilder dataBuilder =null;
         DataObject dataObjectUT = null;
         try {
-            dataBuilder = new DataBuilder(smallerListOfArrays);
+             dataBuilder = new DataBuilder(smallerListOfArrays,dataValidator);
 
         } catch (InvalidInputDataException e) {
             System.out.println(e.getErrorMessage());
@@ -134,16 +172,42 @@ public class TestDataBuilder {
         }
 
 
-        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObject();
+        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObjects();
+
         dataObjectUT = dataObjects.get(0);
 
         Assert.assertTrue(dataObjects.size()==1);
         Assert.assertNotNull(dataObjectUT);
+
+    }
+
+    @Test
+    public void DataBuilder_Parses_And_Returns_TSCO_Data_Object() {
+
+        List<String[]> smallerListOfArrays = new ArrayList<String[]>();
+        smallerListOfArrays.add(valid_data);
+        DataBuilder dataBuilder=null;
+
+        DataObject dataObjectUT = null;
+        try {
+            dataBuilder = new DataBuilder(smallerListOfArrays,dataValidator);
+
+        } catch (InvalidInputDataException e) {
+            System.out.println(e.getErrorMessage());
+            fail(e.getErrorMessage());
+        }
+
+
+        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObjects();
+
+        dataObjectUT = dataObjects.get(0);
+
         Assert.assertEquals("TSCO", dataObjectUT.getSymbol());
         Assert.assertEquals(7.54, dataObjectUT.getRoce(),0);
 
 
     }
+
 
 
 }

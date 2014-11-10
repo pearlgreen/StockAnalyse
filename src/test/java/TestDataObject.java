@@ -69,6 +69,7 @@ public class TestDataObject {
         String[] array = new String[1];
 
         stub(mockedDataValidator.validCriticalFields(array)).toReturn(false);
+        stub(mockedDataValidator.getExpectedDatasetSize()).toReturn(1);
 
         try{
             DataObject dataObject = new DataObject(array, mockedDataValidator);

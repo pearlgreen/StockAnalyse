@@ -14,7 +14,8 @@ import java.util.List;
 
 public class TestMarket {
 
-  Market market = new Market();
+    DataValidator dataValidator = new DataValidator(1);
+    Market market = new Market();
     ArrayList<String[]> listOfArrays = new ArrayList<>();
 
     @Test
@@ -25,7 +26,7 @@ public class TestMarket {
        string_array[0]="bbb";
        string_array[0]="ccc";
 
-        DataValidator dataValidator = new DataValidator();
+
 
         DataObject dataObject = null;
         try {
@@ -136,7 +137,7 @@ public class TestMarket {
 
         // DataObject testData1 = new DataObject();
         try {
-            DataBuilder dataBuilder=new DataBuilder(listOfArrays);
+            DataBuilder dataBuilder=new DataBuilder(listOfArrays,dataValidator);
         } catch (InvalidInputDataException e) {
             e.printStackTrace();
         }
