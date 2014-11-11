@@ -4,6 +4,7 @@
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 
 
 import java.util.ArrayList;
@@ -14,7 +15,11 @@ import java.util.List;
 
 public class TestMarket {
 
-    DataValidator dataValidator = new DataValidator(1);
+    //DataValidator dataValidator = new DataValidator(1, validationData);
+
+    @Mock
+    DataValidator dataValidator;
+
     Market market = new Market();
     ArrayList<String[]> listOfArrays = new ArrayList<>();
 

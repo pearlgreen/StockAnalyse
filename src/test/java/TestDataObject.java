@@ -4,15 +4,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.stub;
 
@@ -60,7 +54,6 @@ public class TestDataObject {
             fail("Should have thrown InvalidInputDataException");
         } catch (InvalidInputDataException e){
 
-            Mockito.verify(mockedDataValidator).validDatasetSize(array);
             assertThat(e, instanceOf(InvalidInputDataException.class));
             Assert.assertTrue(e.getErrorMessage().contains("Input data array is of incorrect size:"));
         }
@@ -73,10 +66,7 @@ public class TestDataObject {
 
         String[] array = new String[1];
 
-        ArrayList mockErrorsList = new ArrayList<String>();
-        mockErrorsList.add("One Parse Error");
-
-        stub(mockedDataValidator.validateFields(array)).toReturn(mockErrorsList);
+        stub(mockedDataValidator.validateFields(array)).toReturn(false);
         stub(mockedDataValidator.validDatasetSize(array)).toReturn(true);
 
         try{
@@ -86,7 +76,7 @@ public class TestDataObject {
 
             Mockito.verify(mockedDataValidator).validDatasetSize(array);
             assertThat(e, instanceOf(InvalidInputDataException.class));
-            Assert.assertTrue(e.getErrorMessage().contains("Input data at 1 column(s) are incorrect"));
+            Assert.assertTrue(e.getErrorMessage().contains("Input data given is invalid"));
         }
 
 

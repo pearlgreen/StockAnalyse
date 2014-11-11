@@ -3,8 +3,6 @@ import org.junit.Assert;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.mockito.Mockito.stub;
 
@@ -27,7 +25,9 @@ public class TestDataBuilder {
             "","3185","7.54","1.03","0.88","1.53","683.77","","32936","-188.65","7.29","27.81","0.22","387","63557","20206","14043",
             "2506","3795","2487","9190","-2447","134.43","20140222","GB0008847096","175.95","FOOD & DRUG RETAILERS","974"};
 
-    DataValidator dataValidator = new DataValidator(valid_data.length);
+
+
+    DataValidator dataValidator = new DataValidator(valid_data.length, new ArrayList<DataStructure>());
 
 
     @Mock
