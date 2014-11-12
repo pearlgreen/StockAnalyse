@@ -16,17 +16,20 @@ public class DataBuilder {
         dataValidator = _dataValidator;
     }
 
-    public DataBuilder(List<String[]> listOfArrays,DataValidator _dataValidator) throws  InvalidInputDataException {
+    public DataBuilder(List<String[]> listOfArrays,DataValidator _dataValidator) throws InvalidInputDataException{
 
         dataValidator = _dataValidator;
 
-        if (listOfArrays.isEmpty()) throw new InvalidInputDataException("DataBuilder : Input ArrayList is empty");
+        if (listOfArrays.isEmpty()) try {
+            throw new InvalidInputDataException("DataBuilder : Input ArrayList is empty");
+        } catch (InvalidInputDataException e) {
+            e.printStackTrace();
+        }
 
         for (String[] s : listOfArrays){
 
             DataObject dataObject;
             try {
-             dataObject = new DataObject(s, dataValidator);
                 dataObject = new DataObject(s, dataValidator);
                 listOfDataObjects.add(dataObject);
             } catch (InvalidInputDataException e) {

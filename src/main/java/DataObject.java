@@ -124,21 +124,6 @@ public class DataObject {
 
 
 
-
-
-    private List<String> validateDataFields(String[] inputArray) {
-
-        List<String> errors = new ArrayList<String>();
-
-        if (inputArray[SYMBOL_COLUMN].isEmpty())  errors.add("Empty data at:" +SYMBOL_COLUMN);
-        if (inputArray[NAME_COLUMN].isEmpty()) errors.add("Empty data at:" +NAME_COLUMN);
-        if (inputArray[MARKET_CAP_COLUMN].isEmpty()) errors.add("Empty data at:" +MARKET_CAP_COLUMN);
-        if (inputArray[SHARES_COLUMN].isEmpty()) errors.add("Empty data at:" +SHARES_COLUMN);
-
-        return errors;
-    }
-
-
     public String getSymbol() {
         return symbol;
     }

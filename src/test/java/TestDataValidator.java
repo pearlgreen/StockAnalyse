@@ -20,7 +20,7 @@ public class TestDataValidator {
 
         int expectedSize = 4;
 
-        DataValidator dataValidator = new DataValidator(expectedSize, stubDataStructures);
+        DataValidator dataValidator = new DataValidator(stubDataStructures);
         Assert.assertEquals(expectedSize, dataValidator.getExpectedDatasetSize());
 
     }
@@ -30,7 +30,7 @@ public class TestDataValidator {
 
         int expectedSize = 4;
 
-        DataValidator dataValidator = new DataValidator(expectedSize, stubDataStructures);
+        DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfExpectedSize = new String[expectedSize];
 
@@ -43,7 +43,7 @@ public class TestDataValidator {
 
         int expectedSize = 4;
 
-        DataValidator dataValidator = new DataValidator(expectedSize, stubDataStructures);
+        DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfSmallerSize = new String[expectedSize-1];
 
@@ -58,7 +58,7 @@ public class TestDataValidator {
 
 
 
-        DataValidator dataValidator = new DataValidator(expectedSize,stubDataStructures);
+        DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfLargerSize = new String[expectedSize+1];
 
@@ -76,7 +76,7 @@ public class TestDataValidator {
 
 
 
-        DataValidator dataValidator = new DataValidator(1,validationData);
+        DataValidator dataValidator = new DataValidator(validationData);
         String [] arrayToValidate = {"","7.66"};
 
         Assert.assertFalse(dataValidator.validateFields(arrayToValidate));
@@ -92,7 +92,7 @@ public class TestDataValidator {
         validationData.add(new DataStructure(1, "Test Column2", false));
 
 
-        DataValidator dataValidator = new DataValidator(1,validationData);
+        DataValidator dataValidator = new DataValidator(validationData);
         String [] arrayToValidate = {"Test Row1",""};
 
         Assert.assertTrue(dataValidator.validateFields(arrayToValidate));
@@ -108,7 +108,7 @@ public class TestDataValidator {
         validationData.add(new DataStructure(1, "Test Column2", false));
 
 
-        DataValidator dataValidator = new DataValidator(1,validationData);
+        DataValidator dataValidator = new DataValidator(validationData);
         String [] arrayToValidate = {"Test Row1","1.23"};
 
         Assert.assertTrue(dataValidator.validateFields(arrayToValidate));

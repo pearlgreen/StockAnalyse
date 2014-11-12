@@ -11,8 +11,8 @@ public class   DataValidator {
     private ArrayList<DataStructure> validationStructure;
 
 
-    public DataValidator(int _expectedDatasetSize, ArrayList<DataStructure> _validationStructure){
-        this.expectedDatasetSize = _expectedDatasetSize;
+    public DataValidator(ArrayList<DataStructure> _validationStructure){
+        this.expectedDatasetSize = _validationStructure.size();
         this.validationStructure = _validationStructure;
     }
 

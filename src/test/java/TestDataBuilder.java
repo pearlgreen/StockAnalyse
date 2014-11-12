@@ -27,7 +27,7 @@ public class TestDataBuilder {
 
 
 
-    DataValidator dataValidator = new DataValidator(valid_data.length, new ArrayList<DataStructure>());
+    DataValidator dataValidator = new DataValidator(new ArrayList<DataStructure>(41));
 
 
     @Mock

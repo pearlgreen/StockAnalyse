@@ -46,11 +46,16 @@ public class StockAnalyser{
         stockData = new ArrayList<DataObject>();
         List<String[]> tmp = (ArrayList) parser.readAll();
 
-        for(String[] c : tmp){
+        ArrayList<DataStructure> columnDefinition = new ArrayList<DataStructure>();
+        DataValidator dataValidator = new DataValidator(columnDefinition);
 
-          stockData.add((DataObject)Arrays.asList(c));
-
+        DataBuilder builder = null;
+        try {
+            builder = new DataBuilder(tmp,dataValidator);
+        } catch (InvalidInputDataException e) {
+            e.printStackTrace();
         }
+        stockData = builder.fetchDataValidDataObjects();
 
         //headers =  stockData.get(0);
         stockData.remove(headers);
