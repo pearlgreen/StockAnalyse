@@ -1,24 +1,31 @@
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by James on 11/11/2014.
  */
 public class TestDataValidator {
 
+    @Mock
     ArrayList<DataStructure> stubDataStructures;
-
-
     @Test
     public void DataValidator_ValidDatasetSize_sets_DatasetExpectedSize(){
 
         int expectedSize = 4;
+
+        stubDataStructures = mock(ArrayList.class);
+        when(stubDataStructures.size()).thenReturn(expectedSize);
+
+
 
         DataValidator dataValidator = new DataValidator(stubDataStructures);
         Assert.assertEquals(expectedSize, dataValidator.getExpectedDatasetSize());
@@ -30,10 +37,13 @@ public class TestDataValidator {
 
         int expectedSize = 4;
 
+        stubDataStructures = mock(ArrayList.class);
+        when(stubDataStructures.size()).thenReturn(expectedSize);
+
+
         DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfExpectedSize = new String[expectedSize];
-
         Assert.assertTrue(dataValidator.validDatasetSize(arrayOfExpectedSize));
 
     }
@@ -43,6 +53,8 @@ public class TestDataValidator {
 
         int expectedSize = 4;
 
+        stubDataStructures = mock(ArrayList.class);
+        when(stubDataStructures.size()).thenReturn(expectedSize);
         DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfSmallerSize = new String[expectedSize-1];
@@ -57,7 +69,8 @@ public class TestDataValidator {
         int expectedSize = 4;
 
 
-
+        stubDataStructures = mock(ArrayList.class);
+        when(stubDataStructures.size()).thenReturn(expectedSize);
         DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         String [] arrayOfLargerSize = new String[expectedSize+1];

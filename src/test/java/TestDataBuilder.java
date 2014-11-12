@@ -4,6 +4,8 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
 
 import java.util.*;
@@ -12,6 +14,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by J on 02-Nov-2014.
@@ -25,7 +28,8 @@ public class TestDataBuilder {
             "","3185","7.54","1.03","0.88","1.53","683.77","","32936","-188.65","7.29","27.81","0.22","387","63557","20206","14043",
             "2506","3795","2487","9190","-2447","134.43","20140222","GB0008847096","175.95","FOOD & DRUG RETAILERS","974"};
 
-
+    @Mock
+    ArrayList<DataStructure> stubDataStructures;
 
     DataValidator dataValidator = new DataValidator(new ArrayList<DataStructure>(41));
 
@@ -86,6 +90,8 @@ public class TestDataBuilder {
     public void DataBuilder_FetchData_returns_ExceptionIfListOfArraysIsEmpty(){
 
         DataBuilder dataBuilder = null;
+
+
         try {
             dataBuilder = new DataBuilder(new ArrayList<String[]>(),stubbedDataValidator);
             fail("Should have thrown InvalidInputDataException");
@@ -161,6 +167,10 @@ public class TestDataBuilder {
         List<String[]> smallerListOfArrays = new ArrayList<String[]>();
          smallerListOfArrays.add(valid_data);
         DataBuilder dataBuilder=null;
+
+        stubDataStructures = mock(ArrayList.class);
+        when(stubDataStructures.size()).thenReturn(41);
+        DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         DataObject dataObjectUT = null;
         try {

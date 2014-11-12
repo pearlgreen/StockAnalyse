@@ -12,9 +12,11 @@ public class   DataValidator {
 
 
     public DataValidator(ArrayList<DataStructure> _validationStructure){
+
         this.expectedDatasetSize = _validationStructure.size();
         this.validationStructure = _validationStructure;
     }
+
 
 
     public boolean validateFields(String[] array) {
