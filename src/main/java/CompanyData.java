@@ -1,196 +1,237 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by James on 25/10/2014.
  */
 public class CompanyData {
 
-    private int dateOfData;
+    private String dateOfData;
     private double MarketCap;
-    private float PEratio;
-    private float SharesIssue;
-    private float DivYield;
-    private float DivCover;
-    private float Spread;
-    private float NoOfEarningsDrops;
-    private float EarningsYield;
-    private float EnterpriseValue;
-    private float FiveYearCompoundGrowth;
-    private float Operations;
-    private float Roce;
-    private float DebtToEquity;
-    private float CurrentRatio;
-    private float NetProfitMargin;
-    private float EarningsGrowth;
-    private float Change1Yr;
-    private float ChangeFromLow;
-    private float PreTaxProfit;
+    private double PEratio;
+    private double SharesIssue;
+    private double DivYield;
+    private double DivCover;
+    private double Spread;
+    private double NoOfEarningsDrops;
+    private double EarningsYield;
+    private double EnterpriseValue;
+    private double FiveYearCompoundGrowth;
+    private double Operations;
+    private double Roce;
+    private double DebtToEquity;
+    private double CurrentRatio;
 
-    private CalculatedData calculated;
-
-
-    public CompanyData(DataObject subSetOfCSVData, int _dateOfData){
-
-        dateOfData = _dateOfData;
-        calculated = new CalculatedData();
-        this.setMarketCap(subSetOfCSVData.getMarketCap());
-        //this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
-
-
-    }
-
-    public int getDate() {
+    public String getDateOfData() {
         return dateOfData;
     }
 
-    public float getPEratio() {
-        return PEratio;
-    }
-
-    public void setPEratio(float PEratio) {
-        this.PEratio = PEratio;
-    }
-
-    public float getSharesIssue() {
-        return SharesIssue;
-    }
-
-    public void setSharesIssue(float sharesIssue) {
-        SharesIssue = sharesIssue;
-    }
-
-    public float getDivYield() {
-        return DivYield;
-    }
-
-    public void setDivYield(float divYield) {
-        DivYield = divYield;
-    }
-
-    public float getDivCover() {
-        return DivCover;
-    }
-
-    public void setDivCover(float divCover) {
-        DivCover = divCover;
-    }
-
-    public float getSpread() {
-        return Spread;
-    }
-
-    public void setSpread(float spread) {
-        Spread = spread;
-    }
-
-    public float getNoOfEarningsDrops() {
-        return NoOfEarningsDrops;
-    }
-
-    public void setNoOfEarningsDrops(float noOfEarningsDrops) {
-        NoOfEarningsDrops = noOfEarningsDrops;
-    }
-
-    public float getEarningsYield() {
-        return EarningsYield;
-    }
-
-    public void setEarningsYield(float earningsYield) {
-        EarningsYield = earningsYield;
-    }
-
-    public float getEnterpriseValue() {
-        return EnterpriseValue;
-    }
-
-    public void setEnterpriseValue(float enterpriseValue) {
-        EnterpriseValue = enterpriseValue;
-    }
-
-    public float getFiveYearCompoundGrowth() {
-        return FiveYearCompoundGrowth;
-    }
-
-    public void setFiveYearCompoundGrowth(float fiveYearCompoundGrowth) {
-        FiveYearCompoundGrowth = fiveYearCompoundGrowth;
-    }
-
-    public float getOperations() {
-        return Operations;
-    }
-
-    public void setOperations(float operations) {
-        Operations = operations;
-    }
-
-    public float getROCE() {
-        return Roce;
-    }
-
-    public void setROCE(float ROCE) {
-        this.Roce = ROCE;
-    }
-
-    public float getDebtToEquity() {
-        return DebtToEquity;
-    }
-
-    public void setDebtToEquity(float debtToEquity) {
-        DebtToEquity = debtToEquity;
-    }
-
-    public float getCurrentRatio() {
-        return CurrentRatio;
-    }
-
-    public void setCurrentRatio(float currentRatio) {
-        CurrentRatio = currentRatio;
-    }
-
-    public float getNetProfitMargin() {
-        return NetProfitMargin;
-    }
-
-    public void setNetProfitMargin(float netProfitMargin) {
-        NetProfitMargin = netProfitMargin;
-    }
-
-    public float getEarningsGrowth() {
-        return EarningsGrowth;
-    }
-
-    public void setEarningsGrowth(float earningsGrowth) {
-        EarningsGrowth = earningsGrowth;
-    }
-
-    public float getChange1Yr() {
-        return Change1Yr;
-    }
-
-    public void setChange1Yr(float change1Yr) {
-        Change1Yr = change1Yr;
-    }
-
-    public float getChangeFromLow() {
-        return ChangeFromLow;
-    }
-
-    public void setChangeFromLow(float changeFromLow) {
-        ChangeFromLow = changeFromLow;
-    }
-
-    public float getPreTaxProfit() {
-        return PreTaxProfit;
-    }
-
-    public void setPreTaxProfit(float preTaxProfit) {
-        PreTaxProfit = preTaxProfit;
+    public void setDateOfData(Date dateOfData) {
+        this.dateOfData =  new SimpleDateFormat("ddMMyyyy").format(dateOfData) ;
     }
 
     public double getMarketCap() {
-        return
-                    MarketCap;
+        return MarketCap;
     }
 
     public void setMarketCap(double marketCap) {
         MarketCap = marketCap;
     }
+
+    public double getPEratio() {
+        return PEratio;
+    }
+
+    public void setPEratio(double PEratio) {
+        this.PEratio = PEratio;
+    }
+
+    public double getSharesIssue() {
+        return SharesIssue;
+    }
+
+    public void setSharesIssue(double sharesIssue) {
+        SharesIssue = sharesIssue;
+    }
+
+    public double getDivYield() {
+        return DivYield;
+    }
+
+    public void setDivYield(double divYield) {
+        DivYield = divYield;
+    }
+
+    public double getDivCover() {
+        return DivCover;
+    }
+
+    public void setDivCover(double divCover) {
+        DivCover = divCover;
+    }
+
+    public double getSpread() {
+        return Spread;
+    }
+
+    public void setSpread(double spread) {
+        Spread = spread;
+    }
+
+    public double getNoOfEarningsDrops() {
+        return NoOfEarningsDrops;
+    }
+
+    public void setNoOfEarningsDrops(double noOfEarningsDrops) {
+        NoOfEarningsDrops = noOfEarningsDrops;
+    }
+
+    public double getEarningsYield() {
+        return EarningsYield;
+    }
+
+    public void setEarningsYield(double earningsYield) {
+        EarningsYield = earningsYield;
+    }
+
+    public double getEnterpriseValue() {
+        return EnterpriseValue;
+    }
+
+    public void setEnterpriseValue(double enterpriseValue) {
+        EnterpriseValue = enterpriseValue;
+    }
+
+    public double getFiveYearCompoundGrowth() {
+        return FiveYearCompoundGrowth;
+    }
+
+    public void setFiveYearCompoundGrowth(double fiveYearCompoundGrowth) {
+        FiveYearCompoundGrowth = fiveYearCompoundGrowth;
+    }
+
+    public double getOperations() {
+        return Operations;
+    }
+
+    public void setOperations(double operations) {
+        Operations = operations;
+    }
+
+    public double getRoce() {
+        return Roce;
+    }
+
+    public void setRoce(double roce) {
+        Roce = roce;
+    }
+
+    public double getDebtToEquity() {
+        return DebtToEquity;
+    }
+
+    public void setDebtToEquity(double debtToEquity) {
+        DebtToEquity = debtToEquity;
+    }
+
+    public double getCurrentRatio() {
+        return CurrentRatio;
+    }
+
+    public void setCurrentRatio(double currentRatio) {
+        CurrentRatio = currentRatio;
+    }
+
+    public double getNetProfitMargin() {
+        return NetProfitMargin;
+    }
+
+    public void setNetProfitMargin(double netProfitMargin) {
+        NetProfitMargin = netProfitMargin;
+    }
+
+    public double getEarningsGrowth() {
+        return EarningsGrowth;
+    }
+
+    public void setEarningsGrowth(double earningsGrowth) {
+        EarningsGrowth = earningsGrowth;
+    }
+
+    public double getChange1Yr() {
+        return Change1Yr;
+    }
+
+    public void setChange1Yr(double change1Yr) {
+        Change1Yr = change1Yr;
+    }
+
+    public double getChangeFromLow() {
+        return ChangeFromLow;
+    }
+
+    public void setChangeFromLow(double changeFromLow) {
+        ChangeFromLow = changeFromLow;
+    }
+
+    public double getPreTaxProfit() {
+        return PreTaxProfit;
+    }
+
+    public void setPreTaxProfit(double preTaxProfit) {
+        PreTaxProfit = preTaxProfit;
+    }
+
+    public CalculatedData getCalculated() {
+        return calculated;
+    }
+
+    public void setCalculated(CalculatedData calculated) {
+        this.calculated = calculated;
+    }
+
+    private double NetProfitMargin;
+    private double EarningsGrowth;
+    private double Change1Yr;
+    private double ChangeFromLow;
+    private double PreTaxProfit;
+
+    private CalculatedData calculated;
+
+
+    public CompanyData(DataObject subSetOfCSVData, Date _dateOfData){
+
+        setDateOfData(_dateOfData);
+        calculated = new CalculatedData();
+        setMarketCap(subSetOfCSVData.getMarketCap());
+        MarketCap = subSetOfCSVData.getMarketCap();
+        PEratio = subSetOfCSVData.getPe_ratio();
+        SharesIssue = subSetOfCSVData.getShares();
+        DivYield = subSetOfCSVData.getDiv_yield();
+        DivCover = subSetOfCSVData.getDiv_cover();
+        Spread = subSetOfCSVData.getSpread();
+        NoOfEarningsDrops = subSetOfCSVData.getEarning_drops();
+        EarningsYield = subSetOfCSVData.getEarnings_yield();
+        EnterpriseValue = subSetOfCSVData.getEnterprise_val();
+        FiveYearCompoundGrowth = subSetOfCSVData.getFive_yr_grwth();
+        Operations = subSetOfCSVData.getOperations();
+        Roce = subSetOfCSVData.getRoce();
+        DebtToEquity = subSetOfCSVData.getDebt_to_equity();
+        CurrentRatio = subSetOfCSVData.getCurrent_ratio();
+        NetProfitMargin = subSetOfCSVData.getNet_margin();
+        EarningsGrowth = subSetOfCSVData.getEarnings_grwth();
+        Change1Yr = subSetOfCSVData.getChange_from_1yr();
+        ChangeFromLow = subSetOfCSVData.getChange_from_low();
+        PreTaxProfit = subSetOfCSVData.getPre_tax_profit();
+        this.calculated = calculated;
+        //this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
+
+
+    }
+
+    public String getDate() {
+        return dateOfData;
+    }
+
+
 }

@@ -38,9 +38,6 @@ public class DataBuilder {
         System.out.println("DataBuilder : Attempted to build " + attemptedObjects + " objects, " + listOfDataObjects.size() + " completed");
     }
 
-
-
-
     public List<DataObject> fetchDataValidDataObjects() {
 
         return listOfDataObjects;

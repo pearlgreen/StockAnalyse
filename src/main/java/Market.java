@@ -19,7 +19,7 @@ public class Market {
     public int buildCompanies (List<DataObject> _DataObjectList) {
 
 
-        int _timeOfExtraction = new GregorianCalendar().get(Calendar.DATE);
+        Date _timeOfExtraction = new Date();
         int count=0;
 
 
@@ -29,7 +29,7 @@ public class Market {
 
             if (company == null) {
 
-                company = new Company(c,_timeOfExtraction);
+                company = new Company(c,new Date());
                 AddCompany(company);
                 count++;
 

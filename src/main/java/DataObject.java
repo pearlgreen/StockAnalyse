@@ -7,7 +7,6 @@ import java.util.*;
  */
 public class DataObject {
 
-    final int DATASET_SIZE = 41;
     private final DataValidator dataValidator;
     String[] validDataSet;
 
@@ -18,9 +17,14 @@ public class DataObject {
     private String industry;
 
     private double marketCap;
-    private int creationDate;
+    private Date creationDate;
     private double roce;
     private double pe_ratio;
+
+    public DataValidator getDataValidator() {
+        return dataValidator;
+    }
+
     private double shares;
     private double div_yield;
     private double div_cover;
@@ -51,6 +55,159 @@ public class DataObject {
     private double net_tang_assets;
     private double latest_price;
     private double price_to_sales;
+
+    public String[] getValidDataSet() {
+        return validDataSet;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public double getPe_ratio() {
+        return pe_ratio;
+    }
+
+    public double getShares() {
+        return shares;
+    }
+
+    public double getDiv_yield() {
+        return div_yield;
+    }
+
+    public double getDiv_cover() {
+        return div_cover;
+    }
+
+    public double getOp_margin() {
+        return op_margin;
+    }
+
+    public double getSpread() {
+        return spread;
+    }
+
+    public double getPrice_to_cash() {
+        return price_to_cash;
+    }
+
+    public double getEarning_drops() {
+        return earning_drops;
+    }
+
+    public double getEarnings_yield() {
+        return earnings_yield;
+    }
+
+    public double getEarnings_grwth() {
+        return earnings_grwth;
+    }
+
+    public double getEnterprise_val() {
+        return enterprise_val;
+    }
+
+    public double getFive_yr_grwth() {
+        return five_yr_grwth;
+    }
+
+    public double getChange_from_1yr() {
+        return change_from_1yr;
+    }
+
+    public double getChange_from_low() {
+        return change_from_low;
+    }
+
+    public double getCurrent_ratio() {
+        return current_ratio;
+    }
+
+    public double getCredit_short() {
+        return credit_short;
+    }
+
+    public double getCredit_long() {
+        return credit_long;
+    }
+
+    public double getCash_equivs() {
+        return cash_equivs;
+    }
+
+    public double getCurrent_assets() {
+        return current_assets;
+    }
+
+    public double getRetained_cash() {
+        return retained_cash;
+    }
+
+    public double getResults_date() {
+        return results_date;
+    }
+
+    public double getAttributed_profit() {
+        return attributed_profit;
+    }
+
+    public double getOperations() {
+        return operations;
+    }
+
+    public double getDebt_to_equity() {
+        return debt_to_equity;
+    }
+
+    public double getDebtors() {
+        return debtors;
+    }
+
+    public double getNet_margin() {
+        return net_margin;
+    }
+
+    public double getNet_debt() {
+        return net_debt;
+    }
+
+    public double getNet_work_capital() {
+        return net_work_capital;
+    }
+
+    public double getNet_tang_assets() {
+        return net_tang_assets;
+    }
+
+    public double getLatest_price() {
+        return latest_price;
+    }
+
+    public double getPrice_to_sales() {
+        return price_to_sales;
+    }
+
+    public double getIntangibles() {
+        return intangibles;
+    }
+
+    public double getPre_tax_profit() {
+        return pre_tax_profit;
+    }
+
+    public double getTurnover() {
+        return turnover;
+    }
+
     private double intangibles;
     private double pre_tax_profit;
     private double turnover;
@@ -61,7 +218,6 @@ public class DataObject {
 
         dataValidator = _dataValidator;
 
-
         if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("DataObject : Input data array is of incorrect size:" +
                 " " + inputArray.length + " and not the required " + dataValidator.getExpectedDatasetSize());
 
@@ -71,11 +227,13 @@ public class DataObject {
              copyToFields();
         }
 
-        else throw new InvalidInputDataException("DataObject : Input data given is invalid ");
+        else throw new InvalidInputDataException("DataObject : Input data given is invalid  : " + inputArray[0]);
 
     }
 
     private void copyToFields() {
+
+        try{
 
         symbol = validDataSet[SYMBOL_COLUMN];
         roce = Double.parseDouble(validDataSet[ROCE]);
@@ -91,7 +249,7 @@ public class DataObject {
         earning_drops= Double.parseDouble(validDataSet[EARNDROPS]);
         earnings_yield= Double.parseDouble(validDataSet[EARNSYIELD]);
         enterprise_val= Double.parseDouble(validDataSet[ENTVALUE]);
-        //five_yr_grwth= Double.parseDouble(validDataSet[FIVEYRGRTH]);
+        five_yr_grwth= Double.parseDouble(validDataSet[FIVEYRGRTH]);
         operations= Double.parseDouble(validDataSet[OPERATIONS]);
         debt_to_equity= Double.parseDouble(validDataSet[DBTEQUITY]);
         current_ratio= Double.parseDouble(validDataSet[CURRENT]);
@@ -117,7 +275,11 @@ public class DataObject {
         latest_price= Double.parseDouble(validDataSet[LATEST_PRICE]);
         industry=validDataSet[INDUSTRY];
         attributed_profit= Double.parseDouble(validDataSet[ATTRIB_PRFT]);
+        }
+        catch (NumberFormatException e){
 
+            e.printStackTrace();
+        }
 
 
     }
@@ -140,46 +302,46 @@ public class DataObject {
         return roce;
     }
 
-    private static final int SYMBOL_COLUMN = 0;
-    private static final int NAME_COLUMN=1;
-    private static final int MARKET_CAP_COLUMN=2;
-    private static final int PERATIO_COLUMN=3;
-    private static final int SHARES_COLUMN=4;
-    private static final int DIVYIELD_COLUMN=5;
-    private static final int DIVCOVER_COLUMN=6;
-    private static final int OPMARGIN_COLUMN=7;
-    private static final int SPREAD=8;
-    private static final int PRICETOCASH=9;
-    private static final int EARNDROPS=10;
-    private static final int EARNSYIELD=11;
-    private static final int ENTVALUE=12;
-    private static final int FIVEYRGRTH=13;
-    private static final int OPERATIONS=14;
-    private static final int ROCE=15;
-    private static final int DBTEQUITY=16;
-    private static final int CURRENT=17;
-    private static final int NETMARGIN=18;
-    private static final int EARNGWTH=19;
-    private static final int DIVGWTH=20;
-    private static final int NETDEBT=21;
-    private static final int ONEYRCHNG=22;
-    private static final int CHNGLOW=23;
-    private static final int PRETAXPFT=24;
-    private static final int PRCTOSALES=25;
-    private static final int RETAINCASH=26;
-    private static final int TURNOVER=27;
-    private static final int CREDITSHRT=28;
-    private static final int CREDITLONG=29;
-    private static final int CASHEQUIV=30;
-    private static final int INTANGBLES=31;
-    private static final int CURRENTASSTS=32;
-    private static final int DEBTORS=33;
-    private static final int NETWKNGCAPIT=34;
-    private static final int NTTANGASSTVL=35;
-    private static final int RSLTPRDDATE=36;
-    private static final int ISIN=37;
-    private static final int LATEST_PRICE=38;
-    private static final int INDUSTRY=39;
-    private static final int ATTRIB_PRFT=40;
+    private static final int SYMBOL_COLUMN = 1;
+    private static final int NAME_COLUMN=2;
+    private static final int MARKET_CAP_COLUMN=3;
+    private static final int PERATIO_COLUMN=4;
+    private static final int SHARES_COLUMN=5;
+    private static final int DIVYIELD_COLUMN=6;
+    private static final int DIVCOVER_COLUMN=7;
+    private static final int OPMARGIN_COLUMN=8;
+    private static final int SPREAD=9;
+    private static final int PRICETOCASH=10;
+    private static final int EARNDROPS=11;
+    private static final int EARNSYIELD=12;
+    private static final int ENTVALUE=13;
+    private static final int FIVEYRGRTH=14;
+    private static final int OPERATIONS=15;
+    private static final int ROCE=16;
+    private static final int DBTEQUITY=17;
+    private static final int CURRENT=18;
+    private static final int NETMARGIN=19;
+    private static final int EARNGWTH=20;
+    private static final int DIVGWTH=21;
+    private static final int NETDEBT=22;
+    private static final int ONEYRCHNG=23;
+    private static final int CHNGLOW=24;
+    private static final int PRETAXPFT=25;
+    private static final int PRCTOSALES=26;
+    private static final int RETAINCASH=27;
+    private static final int TURNOVER=28;
+    private static final int CREDITSHRT=29;
+    private static final int CREDITLONG=30;
+    private static final int CASHEQUIV=31;
+    private static final int INTANGBLES=32;
+    private static final int CURRENTASSTS=33;
+    private static final int DEBTORS=34;
+    private static final int NETWKNGCAPIT=35;
+    private static final int NTTANGASSTVL=36;
+    private static final int RSLTPRDDATE=37;
+    private static final int ISIN=38;
+    private static final int LATEST_PRICE=39;
+    private static final int INDUSTRY=40;
+    private static final int ATTRIB_PRFT=41;
 
 }

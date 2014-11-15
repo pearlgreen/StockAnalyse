@@ -16,11 +16,16 @@ public class StockAnalyser{
     private  List<DataObject>  stockData;
     private Market market;
     List headers;
-
+    ArrayList<DataStructure> columnDefinition;
 
     public StockAnalyser() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
 
     market = new Market();
+
+        File fileOfDataStructure = new File("C:\\Users\\Public\\Documents\\structure.csv");
+        CSVReader parserOfDataStructure = new CSVReader(new FileReader(fileOfDataStructure));
+        List<String[]> tmpStructure =  parserOfDataStructure.readAll();
+        columnDefinition = fetchDataStructure(tmpStructure);
 
     }
 
@@ -40,12 +45,14 @@ public class StockAnalyser{
     public void initialise() throws URISyntaxException, IOException {
         URL url = new URL("http://uk.advfn.com/p.php?pid=filterxdownload&show=1_1_,1_4_,1_2_,1_5_,1_8_,1_10_,1_27_,2_8_,2_18_,2_14_,2_62_,2_78_,3_30_,2_21_,2_45_,2_57_,2_23_,1_12_,1_13_,1_14_,1_87_,1_66_,1_20_,2_9_,3_32_,3_3_,3_16_,3_17_,3_7_,3_12_,3_8_,3_9_,1_17_,1_24_,1_29_,1_52_,1_44_,1_53_,3_4_&sort=3_32_D&cnstr=&zip=0");
         File file = new File("C:\\Users\\Public\\Documents\\temp.csv");
-        org.apache.commons.io.FileUtils.copyURLToFile(url, file);
+       // org.apache.commons.io.FileUtils.copyURLToFile(url, file);
         CSVReader parser = new CSVReader(new FileReader(file));
 
         stockData = new ArrayList<DataObject>();
         List<String[]> tmp = (ArrayList) parser.readAll();
-        ArrayList<DataStructure> columnDefinition = new ArrayList<DataStructure>();
+        tmp.remove(0);
+
+
 
         //columnDefinition.add(new DataStructure(0,""));
 
@@ -59,13 +66,28 @@ public class StockAnalyser{
         }
         stockData = builder.fetchDataValidDataObjects();
 
-        //headers =  stockData.get(0);
-       // stockData.remove(headers);
-        //market.generateFromNewExtraction(stockData);
+        // DataObject headers =  stockData.get(0);
+        // stockData.remove(headers);
+        int companies =  market.buildCompanies(stockData);
+        System.out.println("Market : "+market.getNoOfCompanies()+" Companies created");
+
 
 
     }
 
+
+    public ArrayList<DataStructure> fetchDataStructure(List<String[]> dataSource){
+
+        ArrayList<DataStructure> _completeColumns = new ArrayList<DataStructure>();
+
+        if (!dataSource.isEmpty()){
+            for (String [] s : dataSource) {
+                _completeColumns.add(new DataStructure(Integer.valueOf(s[0]), s[1], Boolean.valueOf(s[2])));
+            }
+        }
+
+        return _completeColumns;
+    }
 
     // every list of data
     // if company symbol is new, then create Company
@@ -102,8 +124,8 @@ public class StockAnalyser{
 
     public void writeToFile() throws IOException {
 
+        market.SetPersistence(new PersistenceHandler());
         market.SaveMarkets("ftse");
-
 
            }
 

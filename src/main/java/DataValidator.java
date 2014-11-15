@@ -27,7 +27,13 @@ public class   DataValidator {
 
             for (DataStructure e : validationStructure) {
                 if (i == e.getIndex()) {
-                    if (e.isShouldNotBeNull() && content.isEmpty()) return false;
+                    if (e.isShouldNotBeNull() && content.isEmpty()){
+                                                return false;
+                    }
+                    //NEEDS TO BE CLEANED UP
+                    else if (content.isEmpty()){
+                        array[i] = "0.0";
+                    }
                 }
             }
         }

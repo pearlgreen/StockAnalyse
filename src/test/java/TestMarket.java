@@ -7,10 +7,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 
 public class TestMarket {
@@ -87,7 +84,7 @@ public class TestMarket {
        // testData.setSymbol("XXX");
 
         Market ftse = new Market();
-        Company company = new Company(null,new GregorianCalendar().get(Calendar.DATE));
+        Company company = new Company(null,new Date());
 
         ftse.AddCompany(company);
 
@@ -103,10 +100,12 @@ public class TestMarket {
 
         List<DataObject> listOfData = new ArrayList<DataObject>();
 
-       // DataObject testData1 = new DataObject();
-       // testData1._companyName="The Test Company";
-       // testData1._sector="Sector X";
-       // testData1._symbol="XXX";
+      //  String[] valid_data = {"1","TSCO", "Tesco");
+
+
+
+      //  DataObject testData1 = new DataObject(valid_data,new DataValidator(new DataStructure(0,"test3",false)));
+
 
         // DataObject testData2 = new DataObject();
         //testData2._companyName="The Test Company";
@@ -118,10 +117,9 @@ public class TestMarket {
         //testData3._sector="Sector Y";
         //testData3._symbol="YYY";
 
-        //  listOfData.add(testData1);
-        //  listOfData.add(testData2);
-        //  listOfData.add(testData3);
-        // listOfData.add(testData3);
+      //  listOfData.add(testData1);
+       // listOfData.add(testData2);
+        //listOfData.add(testData3);
 
         int companiesAdded = marketToTest.buildCompanies(listOfData);
 
@@ -152,7 +150,7 @@ public class TestMarket {
 
 
         marketToTest.buildCompanies(listOfData);
-        CompanyData actualData = marketToTest.FindBySymbol("XXX").fetchDataForDate(new GregorianCalendar().get(Calendar.DATE));
+        CompanyData actualData = marketToTest.FindBySymbol("XXX").fetchDataForDate(new Date());
 
         //     CompanyData expectedData = new CompanyData(testData1, new GregorianCalendar().get(Calendar.DATE));
 

@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -6,7 +8,7 @@ import java.util.List;
  */
 public class Company  {
 
-    private int dateOfCreation;
+    private String dateOfCreation;
     private String companySymbol;
     private String companyName;
     private String sector;
@@ -15,12 +17,13 @@ public class Company  {
     private List<CompanyData> historicalData;
 
 
-    public Company(DataObject _dataIn, int dateOfCreation) {
+    public Company(DataObject _dataIn, Date dateOfCreation) {
 
-        this.dateOfCreation = dateOfCreation;
+        this.dateOfCreation = new SimpleDateFormat("ddMMyyyy").format(dateOfCreation);
         this.setCompanySymbol(_dataIn.getSymbol());
         this.setCompanyName(_dataIn.getCompany_name());
         this.setSector(_dataIn.getSector());
+
 
         currentData = new CompanyData(_dataIn, dateOfCreation);
         historicalData = new ArrayList<CompanyData>();
@@ -78,10 +81,10 @@ public class Company  {
     }
 
 
-    public CompanyData fetchDataForDate(int _searchDate){
+    public CompanyData fetchDataForDate(Date _searchDate){
 
         for (CompanyData c : historicalData) {
-            if (c.getDate()==(_searchDate)) {
+            if (c.getDate().equals(new SimpleDateFormat("ddMMyyyy").format(_searchDate))) {
                 return c;
             }
         }

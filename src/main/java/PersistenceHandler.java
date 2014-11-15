@@ -1,17 +1,11 @@
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import sun.util.resources.CalendarData;
 
-import java.io.FileNotFoundException;
+import com.google.gson.Gson;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by J on 29-Oct-2014.
@@ -31,7 +25,7 @@ public class PersistenceHandler {
 
         String root = "C:\\Users\\Public\\Documents\\";
         String extension = ".json";
-        int date = new GregorianCalendar().get(Calendar.DATE);
+        String date = new SimpleDateFormat("ddMMyyyy").format(new Date());;
 
         return root + market + date + extension;
 
@@ -49,22 +43,25 @@ public class PersistenceHandler {
         }
 
 
-        JSONObject obj = new JSONObject();
 
         for (Company c : companies) {
-            String jsonText = JSONValue.toJSONString(c);
-            obj.put(market, jsonText);
-        }
-        try {
 
-            file.write(obj.toJSONString());
+            Gson gson = new Gson();
+            String json = gson.toJson(c);
+            //System.out.println(json);
+            try { file.write(json);
+                } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        try {
             file.flush();
             file.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -73,16 +70,16 @@ public class PersistenceHandler {
 
         FileReader fileIn = new FileReader(buildFilename(market));
 
-        JSONParser parser = new JSONParser();
+      //  JSONParser parser = new JSONParser();
 
 
-        Object obj = null;
-        try {
-            obj = parser.parse(fileIn);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonObject = (JSONObject) obj;
+    //    Object obj = null;
+  //      try {
+     //       obj = parser.parse(fileIn);
+       // } catch (ParseException e) {
+       //     e.printStackTrace();
+      //  }
+     //   JSONObject jsonObject = (JSONObject) obj;
 
         //DataObject data = new DataObject();
         //data.setCompany_name((String) jsonObject.get(market));
@@ -92,6 +89,8 @@ public class PersistenceHandler {
 
        fileIn.close();
 
-        return marketData;
-    }
+       return null;
+  //  }
+//
+}
 }
