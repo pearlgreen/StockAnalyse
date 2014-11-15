@@ -62,7 +62,7 @@ public class DataObject {
         dataValidator = _dataValidator;
 
 
-        if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("Input data array is of incorrect size:" +
+        if (!dataValidator.validDatasetSize(inputArray))  throw new InvalidInputDataException("DataObject : Input data array is of incorrect size:" +
                 " " + inputArray.length + " and not the required " + dataValidator.getExpectedDatasetSize());
 
         if (dataValidator.validateFields(inputArray)){

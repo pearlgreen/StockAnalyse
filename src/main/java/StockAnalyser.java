@@ -38,15 +38,17 @@ public class StockAnalyser{
 
 
     public void initialise() throws URISyntaxException, IOException {
-        URL url = new URL("http://uk.advfn.com/p.php?pid=filterxdownload&show=1_1_,1_4_,1_2_,1_5_,1_8_,1_11_,1_10_,1_27_,1_89_,2_8_,2_18_,2_14_,2_62_,2_78_,2_79_,3_28_,3_30_,2_27_,2_21_,2_22_,2_45_,2_57_,2_23_,1_12_,1_13_,1_14_,1_87_,1_66_,1_20_,2_9_,2_75_,3_32_&sort=3_32_D&cnstr=&zip=0");
+        URL url = new URL("http://uk.advfn.com/p.php?pid=filterxdownload&show=1_1_,1_4_,1_2_,1_5_,1_8_,1_10_,1_27_,2_8_,2_18_,2_14_,2_62_,2_78_,3_30_,2_21_,2_45_,2_57_,2_23_,1_12_,1_13_,1_14_,1_87_,1_66_,1_20_,2_9_,3_32_,3_3_,3_16_,3_17_,3_7_,3_12_,3_8_,3_9_,1_17_,1_24_,1_29_,1_52_,1_44_,1_53_,3_4_&sort=3_32_D&cnstr=&zip=0");
         File file = new File("C:\\Users\\Public\\Documents\\temp.csv");
         org.apache.commons.io.FileUtils.copyURLToFile(url, file);
         CSVReader parser = new CSVReader(new FileReader(file));
 
         stockData = new ArrayList<DataObject>();
         List<String[]> tmp = (ArrayList) parser.readAll();
-
         ArrayList<DataStructure> columnDefinition = new ArrayList<DataStructure>();
+
+        //columnDefinition.add(new DataStructure(0,""));
+
         DataValidator dataValidator = new DataValidator(columnDefinition);
 
         DataBuilder builder = null;
@@ -58,7 +60,7 @@ public class StockAnalyser{
         stockData = builder.fetchDataValidDataObjects();
 
         //headers =  stockData.get(0);
-        stockData.remove(headers);
+       // stockData.remove(headers);
         //market.generateFromNewExtraction(stockData);
 
 

@@ -5,6 +5,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.hamcrest.CoreMatchers.any;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
 
@@ -91,7 +94,6 @@ public class TestDataBuilder {
 
         DataBuilder dataBuilder = null;
 
-
         try {
             dataBuilder = new DataBuilder(new ArrayList<String[]>(),stubbedDataValidator);
             fail("Should have thrown InvalidInputDataException");
@@ -142,35 +144,18 @@ public class TestDataBuilder {
 
 
     @Test
-    public void DataBuilder_Parses_And_Returns_Non_Empty_List_Of_Data() {
-
-        List<String[]> smallerListOfArrays = new ArrayList<String[]>();
-        smallerListOfArrays.add(valid_data);
-
-        DataBuilder dataBuilder=null;
-        try {
-            dataBuilder = new DataBuilder(smallerListOfArrays,dataValidator);
-
-        } catch (InvalidInputDataException e) {
-            System.out.println(e.getErrorMessage());
-            fail(e.getErrorMessage());
-        }
-
-        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObjects();
-        Assert.assertFalse(dataObjects.isEmpty());
-
-    }
-
-    @Test
-    public void DataBuilder_Parses_And_Returns_Data_Object() {
+    public void DataBuilder_Parses_And_Returns_ArrayList_Object() {
 
         List<String[]> smallerListOfArrays = new ArrayList<String[]>();
          smallerListOfArrays.add(valid_data);
         DataBuilder dataBuilder=null;
 
-        stubDataStructures = mock(ArrayList.class);
-        when(stubDataStructures.size()).thenReturn(41);
-        DataValidator dataValidator = new DataValidator(stubDataStructures);
+        DataValidator dataValidator = mock(DataValidator.class);
+        when(dataValidator.validDatasetSize(valid_data)).thenReturn(true);
+        when(dataValidator.validateFields(valid_data)).thenReturn(false);
+
+
+       // DataValidator dataValidator = new DataValidator(stubDataStructures);
 
         DataObject dataObjectUT = null;
         try {
@@ -182,12 +167,10 @@ public class TestDataBuilder {
         }
 
 
-        List<DataObject> dataObjects = dataBuilder.fetchDataValidDataObjects();
+        List dataObject = dataBuilder.fetchDataValidDataObjects();
 
-        dataObjectUT = dataObjects.get(0);
-
-        Assert.assertTrue(dataObjects.size()==1);
-        Assert.assertNotNull(dataObjectUT);
+        Assert.assertThat(dataObject,is(ArrayList.class));
+        Assert.assertTrue(dataObject.isEmpty());
 
     }
 
@@ -197,6 +180,9 @@ public class TestDataBuilder {
         List<String[]> smallerListOfArrays = new ArrayList<String[]>();
         smallerListOfArrays.add(valid_data);
         DataBuilder dataBuilder=null;
+
+
+
 
         DataObject dataObjectUT = null;
         try {

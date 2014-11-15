@@ -19,15 +19,13 @@ public class DataBuilder {
     public DataBuilder(List<String[]> listOfArrays,DataValidator _dataValidator) throws InvalidInputDataException{
 
         dataValidator = _dataValidator;
+        int attemptedObjects=0;
 
-        if (listOfArrays.isEmpty()) try {
-            throw new InvalidInputDataException("DataBuilder : Input ArrayList is empty");
-        } catch (InvalidInputDataException e) {
-            e.printStackTrace();
-        }
+        if (listOfArrays.isEmpty())      throw new InvalidInputDataException("DataBuilder : Input List of String arrays is empty");
 
         for (String[] s : listOfArrays){
 
+            attemptedObjects++;
             DataObject dataObject;
             try {
                 dataObject = new DataObject(s, dataValidator);
@@ -35,12 +33,9 @@ public class DataBuilder {
             } catch (InvalidInputDataException e) {
               System.out.println("DataBuilder : Problem creating new DataObject");
             }
-
-
-
-
         }
 
+        System.out.println("DataBuilder : Attempted to build " + attemptedObjects + " objects, " + listOfDataObjects.size() + " completed");
     }
 
 
