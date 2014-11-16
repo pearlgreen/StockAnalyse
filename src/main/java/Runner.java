@@ -16,10 +16,11 @@ public class Runner  {
 
         StockAnalyser test = new StockAnalyser();
 
+        test.LoadMarketFromFile("ftse");
         test.initialise();
-        test.writeToFile();
-       // test.generateForDate(new Date(System.currentTimeMillis()));
 
+       // test.generateForDate(new Date(System.currentTimeMillis()));
+        test.writeToFile("ftse");
 
     }
 }

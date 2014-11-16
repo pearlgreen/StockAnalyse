@@ -84,11 +84,11 @@ public class Company  {
     public CompanyData fetchDataForDate(Date _searchDate){
 
         for (CompanyData c : historicalData) {
-            if (c.getDate().equals(new SimpleDateFormat("ddMMyyyy").format(_searchDate))) {
+
+            if (c.getDateOfData().equals(new SimpleDateFormat("ddMMyyyy").format(_searchDate))) {
                 return c;
             }
         }
-
         return null;
 
     }

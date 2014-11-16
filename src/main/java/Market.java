@@ -35,10 +35,15 @@ public class Market {
 
                 }
 
+
             CompanyData companyData = company.fetchDataForDate(_timeOfExtraction);
 
-            if (companyData == null) {
-                company.addData(companyData);
+            if (companyData==null) {
+              //  System.out.println("companyData"+companyData.getDateOfData());
+                CompanyData newCompanyData = new CompanyData(c,new Date());
+                company.addData(newCompanyData);
+                if(Integer.valueOf(newCompanyData.getDateOfData()) > Integer.valueOf(company.getCurrentData().getDateOfData()));
+                company.setCurrentData(newCompanyData);
             }
         }
 
@@ -101,20 +106,8 @@ public class Market {
 
     public void SaveMarkets(String _marketToSaveAs) {
 
-        handler.SaveMarketData(companies,_marketToSaveAs);
+        handler.SaveMarketData(this,_marketToSaveAs);
 
     }
 
-    public void LoadCompanies(String _marketToLookFor) {
-
-        try {
-            System.out.println(handler.buildFilename(_marketToLookFor));
-
-            companies = handler.getMarketData(_marketToLookFor);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 }

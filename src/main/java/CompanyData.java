@@ -229,9 +229,5 @@ public class CompanyData {
 
     }
 
-    public String getDate() {
-        return dateOfData;
-    }
-
 
 }

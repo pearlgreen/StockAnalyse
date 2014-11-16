@@ -69,7 +69,7 @@ public class StockAnalyser{
         // DataObject headers =  stockData.get(0);
         // stockData.remove(headers);
         int companies =  market.buildCompanies(stockData);
-        System.out.println("Market : "+market.getNoOfCompanies()+" Companies created");
+        System.out.println("Market has : "+market.getNoOfCompanies()+" companes, "+companies+" Companies created");
 
 
 
@@ -79,6 +79,7 @@ public class StockAnalyser{
     public ArrayList<DataStructure> fetchDataStructure(List<String[]> dataSource){
 
         ArrayList<DataStructure> _completeColumns = new ArrayList<DataStructure>();
+
 
         if (!dataSource.isEmpty()){
             for (String [] s : dataSource) {
@@ -122,15 +123,30 @@ public class StockAnalyser{
     }*/
 
 
-    public void writeToFile() throws IOException {
+    public void writeToFile(String _marketToSave) throws IOException {
 
         market.SetPersistence(new PersistenceHandler());
-        market.SaveMarkets("ftse");
+        market.SaveMarkets(_marketToSave);
 
            }
 
 
-}
+    public void LoadMarketFromFile(String _marketToLookFor) throws IOException {
 
+        PersistenceHandler handler = new PersistenceHandler();
+
+            try {
+                System.out.println(handler.buildFilename(_marketToLookFor));
+
+                market = handler.getMarket(_marketToLookFor);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
 
 

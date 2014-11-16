@@ -1,9 +1,10 @@
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import org.apache.commons.io.FileUtils;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -13,27 +14,19 @@ import java.util.*;
 public class PersistenceHandler {
 
 
-
-
-    public PersistenceHandler(){
-
-
-    }
-
-
     public String buildFilename(String market){
 
         String root = "C:\\Users\\Public\\Documents\\";
         String extension = ".json";
-        String date = new SimpleDateFormat("ddMMyyyy").format(new Date());;
+     //   String date = new SimpleDateFormat("ddMMyyyy").format(new Date());;
 
-        return root + market + date + extension;
+        return root + market + extension;
 
     }
 
 
 
-    public void SaveMarketData(List<Company> companies, String market) {
+    public void SaveMarketData(Market marketDate, String market) {
 
         FileWriter file = null;
         try {
@@ -44,17 +37,16 @@ public class PersistenceHandler {
 
 
 
-        for (Company c : companies) {
+       // for (Company c : companies) {
 
             Gson gson = new Gson();
-            String json = gson.toJson(c);
+            String json = gson.toJson(marketDate);
             //System.out.println(json);
             try { file.write(json);
                 } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }
 
         try {
             file.flush();
@@ -65,31 +57,40 @@ public class PersistenceHandler {
 
     }
 
-    public ArrayList<Company> getMarketData(String market) throws IOException {
+    public Market getMarket(String market) throws IOException {
 
 
-        FileReader fileIn = new FileReader(buildFilename(market));
-
+       File filein = new File(buildFilename(market));
       //  JSONParser parser = new JSONParser();
 
+        StringReader json = new StringReader(FileUtils.readFileToString(filein));
 
-    //    Object obj = null;
-  //      try {
-     //       obj = parser.parse(fileIn);
-       // } catch (ParseException e) {
-       //     e.printStackTrace();
-      //  }
-     //   JSONObject jsonObject = (JSONObject) obj;
+        Gson gson = new Gson();
 
-        //DataObject data = new DataObject();
-        //data.setCompany_name((String) jsonObject.get(market));
+        JsonReader jsonReader = new JsonReader(json);
+        jsonReader.setLenient(true);
 
-        ArrayList<Company> marketData = new ArrayList<Company>();
+        JsonParser parser = new JsonParser();
+
+
+
+        JsonObject jArray = parser.parse(jsonReader).getAsJsonObject();
+
+               //for(JsonElement obj : jArray )
+       // {
+            Market marketLoaded = gson.fromJson( jArray , Market.class);
+
+        //}
+
+        //ArrayList<Company> marketData = new ArrayList<Company>();
         //marketData.add(new Company(data,20140101)) ;
 
-       fileIn.close();
+        System.out.println(marketLoaded.getNoOfCompanies());
+        System.out.println(marketLoaded.FindBySymbol("TSCO").getCurrentData().getDebtToEquity());
 
-       return null;
+
+
+       return marketLoaded;
   //  }
 //
 }

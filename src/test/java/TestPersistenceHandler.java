@@ -30,7 +30,7 @@ public class TestPersistenceHandler {
         market.SetPersistence(jsonhandler);
         market.SaveMarkets("ftse");
 
-        Mockito.verify(jsonhandler,Mockito.times(1)).SaveMarketData(Mockito.anyListOf(Company.class), Mockito.eq("ftse"));
+        Mockito.verify(jsonhandler,Mockito.times(1)).SaveMarketData(Mockito.any(Market.class), Mockito.eq("ftse"));
 
     }
 
@@ -39,13 +39,17 @@ public class TestPersistenceHandler {
     public void tess() {
 
 
-        Market market = new Market();
-        market.SetPersistence(jsonhandler);
-
-        market.LoadCompanies("ftse");
+        Market market;
 
         try {
-            Mockito.verify(jsonhandler,Mockito.times(1)).getMarketData(Mockito.eq("ftse"));
+            jsonhandler.getMarket("ftse");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            Mockito.verify(jsonhandler,Mockito.times(1)).getMarket(Mockito.eq("ftse"));
         } catch (IOException e) {
             e.printStackTrace();
         }
