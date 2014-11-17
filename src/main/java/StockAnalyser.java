@@ -69,8 +69,9 @@ public class StockAnalyser{
         // DataObject headers =  stockData.get(0);
         // stockData.remove(headers);
         int companies =  market.buildCompanies(stockData);
-        System.out.println("Market has : "+market.getNoOfCompanies()+" companes, "+companies+" Companies created");
-
+        int dataSets = market.buildCompanyData(stockData);
+        System.out.println("Market has : "+market.getNoOfCompanies()+" companies, "+companies+" Companies created");
+        System.out.println("Market : added "+dataSets+" new datasets");
 
 
     }

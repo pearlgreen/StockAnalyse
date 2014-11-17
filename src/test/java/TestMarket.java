@@ -5,8 +5,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -16,6 +18,9 @@ public class TestMarket {
 
     @Mock
     DataValidator dataValidator;
+
+    @Mock
+    PersistenceHandler jsonhandler;
 
     Market market = new Market();
     ArrayList<String[]> listOfArrays = new ArrayList<>();
@@ -156,6 +161,47 @@ public class TestMarket {
 
         //  Assert.assertEquals(expectedData.getDate(),actualData.getDate());
         //   Assert.assertEquals(expectedData.getMarketCap(),actualData.getMarketCap(),0);
+
+    }
+
+
+
+
+    @Test
+    public void MarketCallsPersistenceHandler_method_called_when_Market_saved() {
+
+
+        //Company company = new Company(new DataObject(),20140101);
+        // company.setCompanySymbol("TEST");
+        // company.setCompanyName("TESTNAME");
+
+        Market market = new Market();
+        //  market.AddCompany(company);
+
+        market.SetPersistence(jsonhandler);
+        market.SaveMarkets("ftse");
+
+        Mockito.verify(jsonhandler, Mockito.times(1)).SaveMarketData(Mockito.any(Market.class), Mockito.eq("ftse"));
+
+    }
+
+
+    @Test
+    public void Test_That_PersistenceHandler_method_called_when_Market_saved() {
+
+
+        Market market = new Market();
+
+          //  market.SetPersistence(jsonhandler);
+           // market.SaveMarkets("ftse");
+
+
+        try {
+            Mockito.verify(jsonhandler,Mockito.times(1)).getMarket(Mockito.eq("ftse"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

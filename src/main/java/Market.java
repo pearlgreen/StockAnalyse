@@ -20,7 +20,7 @@ public class Market {
 
 
         Date _timeOfExtraction = new Date();
-        int count=0;
+        int no_of_Companies_added=0;
 
 
         for (DataObject c : _DataObjectList) {
@@ -29,25 +29,39 @@ public class Market {
 
             if (company == null) {
 
-                company = new Company(c,new Date());
+                company = new Company(c, new Date());
                 AddCompany(company);
-                count++;
+                no_of_Companies_added++;
 
+            }
+        }
+        return no_of_Companies_added;
+    }
+
+    public int buildCompanyData (List<DataObject> _DataObjectList){
+
+        int no_of_dataSetsAddedToCompanies=0;
+
+        for(DataObject o : _DataObjectList){
+
+            Company company = this.FindBySymbol(o.getSymbol());
+
+            if (company != null) {
+
+                CompanyData companyData = company.fetchDataForDate(new Date());
+
+                if (companyData==null) {
+                //  System.out.println("companyData"+companyData.getDateOfData());
+                    CompanyData newCompanyData = new CompanyData(o,new Date());
+                    company.addData(newCompanyData);
+                    if(Integer.valueOf(newCompanyData.getDateOfData()) > Integer.valueOf(company.getCurrentData().getDateOfData()));
+                    company.setCurrentData(newCompanyData);
+                    no_of_dataSetsAddedToCompanies++;
                 }
-
-
-            CompanyData companyData = company.fetchDataForDate(_timeOfExtraction);
-
-            if (companyData==null) {
-              //  System.out.println("companyData"+companyData.getDateOfData());
-                CompanyData newCompanyData = new CompanyData(c,new Date());
-                company.addData(newCompanyData);
-                if(Integer.valueOf(newCompanyData.getDateOfData()) > Integer.valueOf(company.getCurrentData().getDateOfData()));
-                company.setCurrentData(newCompanyData);
             }
         }
 
-        return count;
+        return no_of_dataSetsAddedToCompanies;
     }
 
 
@@ -97,6 +111,10 @@ public class Market {
         return companies.size();
      }
 
+
+    public void setCompanies(ArrayList<Company> _companies){
+        companies = _companies;
+    }
 
     public void SetPersistence(PersistenceHandler handlerObject) {
 

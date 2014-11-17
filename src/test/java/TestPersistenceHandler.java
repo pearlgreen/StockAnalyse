@@ -13,49 +13,6 @@ import java.io.IOException;
 @RunWith(MockitoJUnitRunner.class)
 public class TestPersistenceHandler {
 
-    @Mock
-    PersistenceHandler jsonhandler;
-
-    @Test
-    public void TestThatCompanyObjectWrittenAndReadFromJSON() {
-
-
-        //Company company = new Company(new DataObject(),20140101);
-        // company.setCompanySymbol("TEST");
-        // company.setCompanyName("TESTNAME");
-
-        Market market = new Market();
-        //  market.AddCompany(company);
-
-        market.SetPersistence(jsonhandler);
-        market.SaveMarkets("ftse");
-
-        Mockito.verify(jsonhandler,Mockito.times(1)).SaveMarketData(Mockito.any(Market.class), Mockito.eq("ftse"));
-
-    }
-
-
-    @Test
-    public void tess() {
-
-
-        Market market;
-
-        try {
-            jsonhandler.getMarket("ftse");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            Mockito.verify(jsonhandler,Mockito.times(1)).getMarket(Mockito.eq("ftse"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
 
 }
