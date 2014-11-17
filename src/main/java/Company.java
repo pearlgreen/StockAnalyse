@@ -12,6 +12,25 @@ public class Company  {
     private String companySymbol;
     private String companyName;
     private String sector;
+    private String IndustryName;
+
+    public String getIndustryName() {
+        return IndustryName;
+    }
+
+    public void setIndustryName(String industryName) {
+        IndustryName = industryName;
+    }
+
+    public String getISIN() {
+        return ISIN;
+    }
+
+    public void setISIN(String ISIN) {
+        this.ISIN = ISIN;
+    }
+
+    private String ISIN;
 
     private CompanyData currentData;
     private List<CompanyData> historicalData;
@@ -23,7 +42,8 @@ public class Company  {
         this.setCompanySymbol(_dataIn.getSymbol());
         this.setCompanyName(_dataIn.getCompany_name());
         this.setSector(_dataIn.getSector());
-
+        this.setIndustryName(_dataIn.getIndustry());
+        this.setISIN(_dataIn.getIsin());
 
         currentData = new CompanyData(_dataIn, dateOfCreation);
         historicalData = new ArrayList<CompanyData>();

@@ -44,7 +44,7 @@ public class DataObject {
     private double cash_equivs;
     private double current_assets;
     private double retained_cash;
-    private double results_date;
+    private String results_date;
     private double attributed_profit;
     private double operations;
     private double debt_to_equity;
@@ -152,7 +152,7 @@ public class DataObject {
         return retained_cash;
     }
 
-    public double getResults_date() {
+    public String getResults_date() {
         return results_date;
     }
 
@@ -270,7 +270,7 @@ public class DataObject {
         debtors= Double.parseDouble(validDataSet[DEBTORS]);
         net_work_capital= Double.parseDouble(validDataSet[NETWKNGCAPIT]);
         net_tang_assets= Double.parseDouble(validDataSet[NTTANGASSTVL]);
-        results_date= Double.parseDouble(validDataSet[RSLTPRDDATE]);
+        results_date= validDataSet[RSLTPRDDATE];
         isin= validDataSet[ISIN];
         latest_price= Double.parseDouble(validDataSet[LATEST_PRICE]);
         industry=validDataSet[INDUSTRY];
