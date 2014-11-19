@@ -54,8 +54,9 @@ public class Market {
                 //  System.out.println("companyData"+companyData.getDateOfData());
                     CompanyData newCompanyData = new CompanyData(o,new Date());
                     company.addData(newCompanyData);
-                    if(Integer.valueOf(newCompanyData.getDateOfData()) > Integer.valueOf(company.getCurrentData().getDateOfData()));
-                    company.setCurrentData(newCompanyData);
+                    if(Integer.valueOf(newCompanyData.getDateOfData()) > Integer.valueOf(company.getCurrentData().getDateOfData())) {
+                        company.setCurrentData(newCompanyData);
+                    }
                     no_of_dataSetsAddedToCompanies++;
                 }
             }
