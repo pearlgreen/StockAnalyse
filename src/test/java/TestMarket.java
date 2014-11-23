@@ -3,18 +3,35 @@
  */
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 
 import java.io.IOException;
 import java.util.*;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.stub;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TestMarket {
 
     //DataValidator dataValidator = new DataValidator(1, validationData);
+    DataObject mockedData = mock(DataObject.class);
+
+    @Before
+    public void setUp(){
+
+        stub(mockedData.getSymbol()).toReturn("TSCO");
+        stub(mockedData.getCompany_name()).toReturn("Tesco");
+        stub(mockedData.getIndustry()).toReturn("XXX");
+        stub(mockedData.getIsin()).toReturn("XXX");
+
+    }
 
     @Mock
     DataValidator dataValidator;
@@ -25,146 +42,78 @@ public class TestMarket {
     Market market = new Market();
     ArrayList<String[]> listOfArrays = new ArrayList<>();
 
-    @Test
-    public void Build_Raw_Data_From_String_Array(){
 
-       String [] string_array = new String [3];
-       string_array[0]="company_name";
-       string_array[0]="bbb";
-       string_array[0]="ccc";
-
-
-
-        DataObject dataObject = null;
-        try {
-            dataObject = new DataObject(string_array, dataValidator);
-        } catch (InvalidInputDataException e) {
-            e.printStackTrace();
-        }
-
-        Assert.assertEquals("company_name", dataObject.getCompany_name());
-
-}
-
-
-    @Test
-    public void Validate_RawData_Object(){
-
-
-
-    }
-
-
-    @Test
-    public void Cannot_Build_Raw_Data(){
-
-
-    }
-
-
-    @Test
-    public void Company_Returns_Null_For_No_Data_At_Date(){
-
-
-       // DataObject testData = new DataObject();
-        //testData.setCompany_name("The Test Company");
-        //testData.setSector("Sector X");
-        //testData.setSymbol("XXX");
-
-       // Company company = new Company(testData,new GregorianCalendar().get(Calendar.DATE));
-
-        //CompanyData data = company.fetchDataForDate(19000101);
-
-        //Assert.assertNull(data);
-
-    }
 
     @Test
     public void Create_New_Company_and_Add_to_Companies(){
 
-
-       // DataObject testData = new DataObject();
-       // testData.setCompany_name("The Test Company");
-       // testData.setSector("Sector X");
-       // testData.setSymbol("XXX");
-
         Market ftse = new Market();
-        Company company = new Company(null,new Date());
+        Company company = new Company(mockedData,new Date());
+
+        Assert.assertEquals(0,ftse.getNoOfCompanies());
 
         ftse.AddCompany(company);
 
-        Assert.assertEquals(company.getCompanySymbol(),"XXX");
-        Assert.assertEquals(ftse.FindBySymbol("XXX"),company);
+        Assert.assertEquals(1, ftse.getNoOfCompanies());
 
     }
 
     @Test
     public void New_Data_Adds_New_Companies_Only(){
 
-        Market marketToTest = new Market();
+        Market ftse = new Market();
+        Company company = new Company(mockedData,new Date(114,1,3));
+        Company company2 = new Company(mockedData,new Date(114,1,2));
 
-        List<DataObject> listOfData = new ArrayList<DataObject>();
+        Assert.assertEquals(0,ftse.getNoOfCompanies());
 
-      //  String[] valid_data = {"1","TSCO", "Tesco");
+        ftse.AddCompany(company);
+        ftse.AddCompany(company2);
 
-
-
-      //  DataObject testData1 = new DataObject(valid_data,new DataValidator(new DataStructure(0,"test3",false)));
-
-
-        // DataObject testData2 = new DataObject();
-        //testData2._companyName="The Test Company";
-        //testData2._sector="Sector X";
-        //testData2._symbol="XXX";
-
-        // DataObject testData3 = new DataObject();
-        //testData3._companyName="The Test Company";
-        //testData3._sector="Sector Y";
-        //testData3._symbol="YYY";
-
-      //  listOfData.add(testData1);
-       // listOfData.add(testData2);
-        //listOfData.add(testData3);
-
-        int companiesAdded = marketToTest.buildCompanies(listOfData);
-
-
-        Assert.assertEquals(2, companiesAdded);
-        Assert.assertEquals(2,marketToTest.getNoOfCompanies());
-
-             }
-
-
-
-    @Test
-    public void New_CompanyData_Added(){
-
-        Market marketToTest = new Market();
-
-        List<DataObject> listOfData = new ArrayList<DataObject>();
-
-        // DataObject testData1 = new DataObject();
-        try {
-            DataBuilder dataBuilder=new DataBuilder(listOfArrays,dataValidator);
-        } catch (InvalidInputDataException e) {
-            e.printStackTrace();
-        }
-
-
-        //  listOfData.add(testData1);
-
-
-        marketToTest.buildCompanies(listOfData);
-        CompanyData actualData = marketToTest.FindBySymbol("XXX").fetchDataForDate(new Date());
-
-        //     CompanyData expectedData = new CompanyData(testData1, new GregorianCalendar().get(Calendar.DATE));
-
-        //  Assert.assertEquals(expectedData.getDate(),actualData.getDate());
-        //   Assert.assertEquals(expectedData.getMarketCap(),actualData.getMarketCap(),0);
-
+        Assert.assertEquals(1, ftse.getNoOfCompanies());
     }
 
 
+    @Test
+      public void Market_Find_Company_By_Symbol(){
+
+        stub(mockedData.getSymbol()).toReturn("TEST");
+
+        Market ftse = new Market();
+
+        Company company = new Company(mockedData,new Date());
+
+        Assert.assertNull(ftse.FindBySymbol("TEST"));
+
+        ftse.AddCompany(company);
+
+        Assert.assertEquals(company, ftse.FindBySymbol("TEST"));
+
+    }
+
+    @Test
+    public void Market_Sort_Companies(){
+
+        Market ftse = new Market();
+
+        stub(mockedData.getSymbol()).toReturn("TESTT");
+        Company company1 = new Company(mockedData,new Date());
+
+        stub(mockedData.getSymbol()).toReturn("TEST");
+        Company company2 = new Company(mockedData,new Date());
+
+        stub(mockedData.getSymbol()).toReturn("TESTA");
+        Company company3 = new Company(mockedData,new Date());
+
+        ftse.AddCompany(company1);
+        ftse.AddCompany(company2);
+        ftse.AddCompany(company3);
+
+        ftse.sortCompaniesBySymbol();
+
+        Assert.assertEquals(company2, ftse.GetListOfCompanies().get(0));
+
+    }
 
 
     @Test
@@ -182,26 +131,6 @@ public class TestMarket {
         market.SaveMarkets("ftse");
 
         Mockito.verify(jsonhandler, Mockito.times(1)).SaveMarketData(Mockito.any(Market.class), Mockito.eq("ftse"));
-
-    }
-
-
-    @Test
-    public void Test_That_PersistenceHandler_method_called_when_Market_saved() {
-
-
-        Market market = new Market();
-
-          //  market.SetPersistence(jsonhandler);
-           // market.SaveMarkets("ftse");
-
-
-        try {
-            Mockito.verify(jsonhandler,Mockito.times(1)).getMarket(Mockito.eq("ftse"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
     }
 

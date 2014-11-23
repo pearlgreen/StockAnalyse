@@ -61,34 +61,16 @@ public class PersistenceHandler {
 
 
        File filein = new File(buildFilename(market));
-      //  JSONParser parser = new JSONParser();
-
-        StringReader json = new StringReader(FileUtils.readFileToString(filein));
+       StringReader json = new StringReader(FileUtils.readFileToString(filein));
 
         Gson gson = new Gson();
 
         JsonReader jsonReader = new JsonReader(json);
         jsonReader.setLenient(true);
-
         JsonParser parser = new JsonParser();
-
-
-
         JsonObject jArray = parser.parse(jsonReader).getAsJsonObject();
 
-               //for(JsonElement obj : jArray )
-       // {
-            Market marketLoaded = gson.fromJson( jArray , Market.class);
-
-        //}
-
-        //ArrayList<Company> marketData = new ArrayList<Company>();
-        //marketData.add(new Company(data,20140101)) ;
-
-        System.out.println(marketLoaded.getNoOfCompanies());
-        System.out.println(marketLoaded.FindBySymbol("TSCO").getCurrentData().getDebtToEquity());
-
-
+        Market marketLoaded = gson.fromJson(jArray , Market.class);
 
        return marketLoaded;
   //  }
