@@ -25,17 +25,15 @@ public class StockAnalyser{
         List<String[]> tmpStructure =  parserOfDataStructure.readAll();
         columnDefinition = fetchDataStructure(tmpStructure);
 
+        market = new Market();
     }
 
     public List getStockData(){
-
         return this.stockData;
-
     }
 
 
     public void setStockData(List<DataObject> listInput){
-
         this.stockData = listInput;
     }
 
@@ -65,7 +63,7 @@ public class StockAnalyser{
 
     public void buildMarketData(){
 
-        market = new Market();
+
         int companies =  market.buildCompanies(stockData);
         int dataSets = market.buildCompanyData(stockData);
         System.out.println("Market has : "+market.getNoOfCompanies()+" companies, "+companies+" Companies created");
