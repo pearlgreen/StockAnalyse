@@ -1,0 +1,43 @@
+0,BLANK,false
+1,Symbol,true
+2,Name,true
+3,Market cap. (m),true
+4,PE ratio,false
+5,Shares in issue (m),false
+6,Dividend yield,false
+7,Dividend cover,false
+8,Operating margin (%),false
+9,Spread (%),false
+10,Price To cash Flow PS,false
+11,No of 5% Earnings drops in last 10yr,false
+12,Earnings Yield,false
+13,Enterprise Value,false
+14,5 year Compound Earnings Growth,false
+15,Operations (m),false
+16,Return On Capital Employed (ROCE),false
+17,Debt To Equity Ratio,false
+18,Current ratio,false
+19,Net Profit Margin,false
+20,Earnings PS - growth rate,false
+21,Dividend PS growth rate,false
+22,Net Debt(m),false
+23,Change from 1Yr Open Price,false
+24,Change from low - year,false
+25,Pre-Tax Profit PS,false
+26,Price To Sales,false
+27,Retained cash (m),false
+28,Turnover (m),false
+29,Creditors; short (m),false
+30,Creditors; long (m),false
+31,Cash & equivalents (m),false
+32,Intangibles (m),false
+33,Current assets - other (m),false
+34,Debtors (m),false
+35,Net Working Capital (m),false
+36,Net tangible asset value PS,false
+37,Result period end date,false
+38,ISIN,false
+39,Last trade price,false
+40,Industry name,false
+41,Attributable Profit,false
+42,blank,false
