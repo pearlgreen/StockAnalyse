@@ -46,6 +46,9 @@ public class CompanyData {
 
     private CalculatedData calculated;
 
+    public CompanyData() {
+    }
+
     public double getPriceToCashFlow() {
         return PriceToCashFlow;
     }

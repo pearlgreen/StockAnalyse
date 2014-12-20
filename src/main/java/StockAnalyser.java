@@ -24,7 +24,6 @@ public class StockAnalyser{
         CSVReader parserOfDataStructure = new CSVReader(new FileReader(fileOfDataStructure));
         List<String[]> tmpStructure =  parserOfDataStructure.readAll();
         columnDefinition = fetchDataStructure(tmpStructure);
-
         market = new Market();
     }
 
@@ -118,25 +117,18 @@ public class StockAnalyser{
     }*/
 
 
-    public void writeToFile(String _marketToSave) throws IOException {
+    public void writeToFile(String _marketToSave, PersistenceHandler handler) throws IOException {
 
-        market.SetPersistence(new MongoPersistenceHandler());
-       // market.SetPersistence(new FilePersistenceHandler());
-        market.SaveMarkets(_marketToSave);
-
+       market.SaveMarkets(_marketToSave,handler);
 
      }
 
 
-    public void LoadMarketFromFile(String _marketToLookFor) throws IOException {
-
-        FilePersistenceHandler handler = new FilePersistenceHandler();
+    public void LoadMarketFromFile(String _marketToLookFor, PersistenceHandler handler) throws IOException {
 
         market = handler.getMarket(_marketToLookFor);
 
-
     }
-
-    }
+}
 
 

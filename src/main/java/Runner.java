@@ -20,12 +20,12 @@ public class Runner  {
 
         StockAnalyser test = new StockAnalyser();
 
-        test.LoadMarketFromFile("ftse");
+        test.LoadMarketFromFile("ftse",new MongoPersistenceHandler());
         test.initialiseData();
         test.buildMarketData();
 
        // test.generateForDate(new Date(System.currentTimeMillis()));
-        test.writeToFile("ftse");
+        test.writeToFile("ftse", new MongoPersistenceHandler());
 
     }
 }

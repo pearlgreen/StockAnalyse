@@ -10,10 +10,8 @@ public class Market {
 
     private ArrayList<Company> companies = new ArrayList<Company>();
 
-    public void Market(){
+    public Market(){}
 
-
-                 }
 
 
     public int buildCompanies (List<DataObject> _DataObjectList) {
@@ -116,16 +114,15 @@ public class Market {
         companies = _companies;
     }
 
-    public void SetPersistence(MongoPersistenceHandler handlerObject) {
+   // public void SetPersistence(MongoPersistenceHandler handlerObject) {
 
-     //   handler = handlerObject;
+        //handler = handlerObject;
 
-    }
+    //}
 
-    public void SaveMarkets(String _marketToSaveAs) {
+    public void SaveMarkets(String _marketToSaveAs, PersistenceHandler handler) {
 
-        MongoPersistenceHandler handler = new MongoPersistenceHandler();
-        handler.SaveMarketData(this,_marketToSaveAs);
+      handler.SaveMarketData(this,_marketToSaveAs);
 
     }
 

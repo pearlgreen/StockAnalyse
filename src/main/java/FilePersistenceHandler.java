@@ -10,8 +10,14 @@ import java.util.*;
 /**
  * Created by J on 29-Oct-2014.
  */
-public class FilePersistenceHandler {
+public class FilePersistenceHandler implements PersistenceHandler{
 
+
+
+    public FilePersistenceHandler(){
+
+
+    }
 
     public String buildFilename(String market){
 
@@ -56,6 +62,8 @@ public class FilePersistenceHandler {
 
     }
 
+
+
     public Market getMarket(String market) {
 
 
@@ -67,16 +75,16 @@ public class FilePersistenceHandler {
             e.printStackTrace();
         }
 
-        Gson gson = new Gson();
 
+        Gson gson = new Gson();
         JsonReader jsonReader = new JsonReader(json);
         jsonReader.setLenient(true);
         JsonParser parser = new JsonParser();
         JsonObject jArray = parser.parse(jsonReader).getAsJsonObject();
 
-        Market marketLoaded = gson.fromJson(jArray , Market.class);
+        return gson.fromJson(jArray , Market.class);
 
-       return marketLoaded;
+
   //  }
 //
 }

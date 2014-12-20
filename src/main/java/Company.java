@@ -31,6 +31,7 @@ public class Company {
 
     private List<CompanyData> historicalData;
 
+    public Company() {}
 
     public Company(DataObject _dataIn, Date dateOfCreation) {
 
