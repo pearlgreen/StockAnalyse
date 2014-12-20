@@ -1,3 +1,6 @@
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +16,7 @@ import java.util.Date;
 public class Runner  {
 
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, URISyntaxException, XPathExpressionException {
+
 
         StockAnalyser test = new StockAnalyser();
 

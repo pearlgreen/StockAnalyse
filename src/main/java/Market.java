@@ -1,3 +1,5 @@
+import com.mongodb.Mongo;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -7,8 +9,6 @@ import java.util.*;
 public class Market {
 
     private ArrayList<Company> companies = new ArrayList<Company>();
-
-    PersistenceHandler handler;
 
     public void Market(){
 
@@ -116,14 +116,15 @@ public class Market {
         companies = _companies;
     }
 
-    public void SetPersistence(PersistenceHandler handlerObject) {
+    public void SetPersistence(MongoPersistenceHandler handlerObject) {
 
-        handler = handlerObject;
+     //   handler = handlerObject;
 
     }
 
     public void SaveMarkets(String _marketToSaveAs) {
 
+        MongoPersistenceHandler handler = new MongoPersistenceHandler();
         handler.SaveMarketData(this,_marketToSaveAs);
 
     }
@@ -132,5 +133,6 @@ public class Market {
 
         return companies;
     }
+
 
 }

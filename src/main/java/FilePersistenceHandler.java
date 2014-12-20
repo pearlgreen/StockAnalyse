@@ -1,6 +1,5 @@
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FileUtils;
 
@@ -11,7 +10,7 @@ import java.util.*;
 /**
  * Created by J on 29-Oct-2014.
  */
-public class PersistenceHandler {
+public class FilePersistenceHandler {
 
 
     public String buildFilename(String market){
@@ -57,11 +56,16 @@ public class PersistenceHandler {
 
     }
 
-    public Market getMarket(String market) throws IOException {
+    public Market getMarket(String market) {
 
 
        File filein = new File(buildFilename(market));
-       StringReader json = new StringReader(FileUtils.readFileToString(filein));
+        StringReader json = null;
+        try {
+            json = new StringReader(FileUtils.readFileToString(filein));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Gson gson = new Gson();
 

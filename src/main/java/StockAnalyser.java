@@ -20,7 +20,7 @@ public class StockAnalyser{
 
     public StockAnalyser() throws SAXException, IOException, URISyntaxException, XPathExpressionException, ParserConfigurationException {
 
-        File fileOfDataStructure = new File("C:\\Users\\Public\\Documents\\structure.csv");
+        File fileOfDataStructure = new File(".idea/structure.csv");
         CSVReader parserOfDataStructure = new CSVReader(new FileReader(fileOfDataStructure));
         List<String[]> tmpStructure =  parserOfDataStructure.readAll();
         columnDefinition = fetchDataStructure(tmpStructure);
@@ -120,27 +120,22 @@ public class StockAnalyser{
 
     public void writeToFile(String _marketToSave) throws IOException {
 
-        market.SetPersistence(new PersistenceHandler());
+        market.SetPersistence(new MongoPersistenceHandler());
+       // market.SetPersistence(new FilePersistenceHandler());
         market.SaveMarkets(_marketToSave);
 
-           }
+
+     }
 
 
     public void LoadMarketFromFile(String _marketToLookFor) throws IOException {
 
-        PersistenceHandler handler = new PersistenceHandler();
+        FilePersistenceHandler handler = new FilePersistenceHandler();
 
-            try {
-                System.out.println(handler.buildFilename(_marketToLookFor));
-
-                market = handler.getMarket(_marketToLookFor);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        market = handler.getMarket(_marketToLookFor);
 
 
-        }
+    }
 
     }
 
