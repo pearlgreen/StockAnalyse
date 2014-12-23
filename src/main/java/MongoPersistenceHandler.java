@@ -39,11 +39,9 @@ public class MongoPersistenceHandler implements PersistenceHandler {
 
         public void SaveMarketData(Market marketDate, String market) {
 
-            System.out.println("MongoPersistence : Save Market Data");
-            // for (Company c : companies) {
+            System.out.println("MongoPersistenceHandler : Save Market Data");
 
             Gson gson = new Gson();
-
             String json = gson.toJson(marketDate);
 
             DBObject dbObject = (DBObject) JSON.parse(json);
@@ -52,7 +50,7 @@ public class MongoPersistenceHandler implements PersistenceHandler {
             DBCollection collection = database.createCollection(market,null);
 
             collection.insert(dbObject);
-            System.out.println("MongoPersistence : Added " + market + " as " + collection.count() + " DB Collection");
+            System.out.println("MongoPersistenceHandler : Added " + market + " as " + collection.count() + " DB Collection");
 
             mongo.close();
 

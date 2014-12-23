@@ -117,14 +117,14 @@ public class StockAnalyser{
     }*/
 
 
-    public void writeToFile(String _marketToSave, PersistenceHandler handler) throws IOException {
+    public void saveData(String _marketToSave, PersistenceHandler handler) throws IOException {
 
        market.SaveMarkets(_marketToSave,handler);
 
      }
 
 
-    public void LoadMarketFromFile(String _marketToLookFor, PersistenceHandler handler) throws IOException {
+    public void loadMarketFromFile(String _marketToLookFor, PersistenceHandler handler) throws IOException {
 
         market = handler.getMarket(_marketToLookFor);
 

@@ -20,6 +20,7 @@ public class DataBuilder {
 
         dataValidator = _dataValidator;
         int attemptedObjects=0;
+        int failedObjects=0;
 
         if (listOfArrays.isEmpty())      throw new InvalidInputDataException("DataBuilder : Input List of String arrays is empty");
 
@@ -31,11 +32,13 @@ public class DataBuilder {
                 dataObject = new DataObject(s, dataValidator);
                 listOfDataObjects.add(dataObject);
             } catch (InvalidInputDataException e) {
-              System.out.println("DataBuilder : Problem creating new DataObject");
+                failedObjects++;
+
+
             }
         }
 
-        System.out.println("DataBuilder : Attempted to build " + attemptedObjects + " objects, " + listOfDataObjects.size() + " completed");
+        System.out.println("DataBuilder : Attempted to build " + attemptedObjects + " objects, " + listOfDataObjects.size() + " completed, " + failedObjects + " failed");
     }
 
     public List<DataObject> fetchDataValidDataObjects() {
