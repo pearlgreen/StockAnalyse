@@ -20,13 +20,28 @@ public class Runner  {
 
         StockAnalyser test = new StockAnalyser();
 
-        test.loadMarketFromFile("ftse",new MongoPersistenceHandler());
+    //   test.loadMarketFromFile("ftse",new FilePersistenceHandler());
 
         test.initialiseData();
         test.buildMarketData();
 
+        test.filterMarket();
+
+
+
+
+
        // test.generateForDate(new Date(System.currentTimeMillis()));
-        test.saveData("ftse", new MongoPersistenceHandler());
+        test.saveData("ftse", new FilePersistenceHandler());
+
+
+        for (Company c : test.filterMarket()){
+
+            System.out.println(c.getCompanyName() + " : " + c.getCompanySymbol() + " : " + c.getCurrentData().getCalculatedReturnOnCapital());
+
+        }
+
+
 
     }
 }

@@ -129,6 +129,16 @@ public class StockAnalyser{
         market = handler.getMarket(_marketToLookFor);
 
     }
+
+
+    public List<Company> filterMarket() {
+
+        FilterCompanies filter = new FilterCompanies(market.GetListOfCompanies());
+        filter.applyFilter();
+        return filter.getFilteredList();
+
+
+    }
 }
 
 

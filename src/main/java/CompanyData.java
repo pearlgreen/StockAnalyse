@@ -42,11 +42,23 @@ public class CompanyData {
     private double ChangeFromLow;
     private double PreTaxProfitPS;
     private double AttribProfit;
+    private double CalculatedReturnOnCapital;
+    private double CalculatedCashReturnPTProfit;
 
 
-    private CalculatedData calculated;
+    public double getCalculatedReturnOnCapital() {
+        return CalculatedReturnOnCapital;
+    }
+
+    public double getCalculatedCashReturnPTProfit() {
+        return CalculatedCashReturnPTProfit;
+    }
+
+
 
     public CompanyData() {
+
+
     }
 
     public double getPriceToCashFlow() {
@@ -114,12 +126,20 @@ public class CompanyData {
     }
 
 
+    public void setCalculatedReturnOnCapital(double calculatedReturnOnCapital) {
+        CalculatedReturnOnCapital = calculatedReturnOnCapital;
+    }
 
+    public void setCalculatedCashReturnPTProfit(double calculatedCashReturnPTProfit) {
+        CalculatedCashReturnPTProfit = calculatedCashReturnPTProfit;
+    }
 
     public CompanyData(DataObject subSetOfCSVData, Date _dateOfData){
 
+
+
         setDateOfData(_dateOfData);
-        calculated = new CalculatedData();
+
         MarketCap = subSetOfCSVData.getMarketCap();
         PEratio = subSetOfCSVData.getPe_ratio();
         SharesIssue = subSetOfCSVData.getShares();
@@ -156,10 +176,15 @@ public class CompanyData {
         LastTradePrice = subSetOfCSVData.getLatest_price();
         AttribProfit = subSetOfCSVData.getAttributed_profit();
 
+        double tempRoC = Operations / (CurrentAssets+CashEquiv+Debtors) * 100 ;
+            if (Double.isNaN(tempRoC)|| Double.isInfinite(tempRoC)) CalculatedReturnOnCapital = 0.00;
+                else CalculatedReturnOnCapital = tempRoC;
 
-        this.calculated = calculated;
-        //this.setMarketCap(Float.valueOf((String)subSetOfCSVData.get(3)));
-    }
+        double tempCR = Operations / PreTaxProfitPS * 100;
+            if (Double.isNaN(tempCR)|| Double.isInfinite(tempCR)) CalculatedReturnOnCapital = 0.00;
+             else CalculatedReturnOnCapital = tempCR ;
+
+           }
         public String getDateOfData() {
             return dateOfData;
         }
@@ -320,13 +345,6 @@ public class CompanyData {
             PreTaxProfitPS = preTaxProfit;
         }
 
-        public CalculatedData getCalculated() {
-            return calculated;
-        }
-
-        public void setCalculated(CalculatedData calculated) {
-            this.calculated = calculated;
-        }
 
 
 

@@ -110,7 +110,7 @@ public class Company {
                 } else if (o1.getDateOfData().equals("")) {
                     return 1;
                 } else {
-                    return o2.getDateOfData().compareTo(o1.getDateOfData());
+                    return o1.getDateOfData().compareTo(o2.getDateOfData());
                 }
 
             }
